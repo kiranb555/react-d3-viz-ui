@@ -16,7 +16,7 @@ export function Gallery({ navigate }: { navigate: (r: Route) => void }) {
             </div>
             <p className="card-blurb">{c.blurb}</p>
             <div className="card-chart">
-              <Chart {...c.fixedProps} {...c.defaultProps} />
+              <Chart {...c.defaultProps} {...c.datasets[0].props} />
             </div>
           </div>
         );

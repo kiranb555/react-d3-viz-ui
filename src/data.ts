@@ -1,5 +1,8 @@
-// Sample datasets shared by the gallery, playground and code snippets.
+// Sample datasets shared by the gallery, examples, playground and code snippets.
+// Grouped by data *shape* so a chart can be swapped between any dataset of the
+// same shape (the playground's dataset switcher relies on this).
 
+// --- series shape: a category key + one or more numeric series ---------------
 export const months = [
   { month: 'Jan', sales: 42, profit: 18 },
   { month: 'Feb', sales: 55, profit: 22 },
@@ -10,12 +13,41 @@ export const months = [
   { month: 'Jul', sales: 84, profit: 36 },
 ];
 
+export const weather = [
+  { month: 'Jan', temp: 4, rainfall: 78 },
+  { month: 'Feb', temp: 6, rainfall: 62 },
+  { month: 'Mar', temp: 10, rainfall: 55 },
+  { month: 'Apr', temp: 14, rainfall: 48 },
+  { month: 'May', temp: 19, rainfall: 41 },
+  { month: 'Jun', temp: 23, rainfall: 33 },
+  { month: 'Jul', temp: 26, rainfall: 29 },
+];
+
+export const traffic = [
+  { week: 'W1', visitors: 1200, signups: 180 },
+  { week: 'W2', visitors: 1480, signups: 240 },
+  { week: 'W3', visitors: 1390, signups: 210 },
+  { week: 'W4', visitors: 1760, signups: 320 },
+  { week: 'W5', visitors: 2050, signups: 410 },
+  { week: 'W6', visitors: 1980, signups: 380 },
+];
+
+// --- xy shape: numeric x / y (+ optional size) -------------------------------
 export const scatter = Array.from({ length: 60 }, () => ({
   x: Math.round(Math.random() * 100),
   y: Math.round(Math.random() * 100),
   size: Math.round(Math.random() * 100 + 5),
 }));
 
+// A clearly positively-correlated cloud (y tracks x with noise), so scatter /
+// bubble charts show a real trend rather than uniform noise.
+export const correlation = Array.from({ length: 60 }, () => {
+  const x = Math.round(Math.random() * 100);
+  const y = Math.round(Math.min(100, Math.max(0, x * 0.8 + (Math.random() - 0.5) * 35)));
+  return { x, y, size: Math.round(Math.random() * 80 + 10) };
+});
+
+// --- pie shape: label + value ------------------------------------------------
 export const pie = [
   { label: 'JavaScript', value: 38.7 },
   { label: 'Python', value: 24.5 },
@@ -25,12 +57,38 @@ export const pie = [
   { label: 'Other', value: 3.2 },
 ];
 
+export const marketShare = [
+  { label: 'Chrome', value: 63.4 },
+  { label: 'Safari', value: 19.8 },
+  { label: 'Edge', value: 5.2 },
+  { label: 'Firefox', value: 3.1 },
+  { label: 'Other', value: 8.5 },
+];
+
+export const budget = [
+  { label: 'Engineering', value: 420 },
+  { label: 'Sales', value: 280 },
+  { label: 'Marketing', value: 190 },
+  { label: 'Support', value: 120 },
+  { label: 'Admin', value: 90 },
+];
+
+// --- values shape: raw numbers for the histogram -----------------------------
 export const histValues = Array.from({ length: 500 }, () => {
   let s = 0;
   for (let i = 0; i < 6; i++) s += Math.random();
   return Math.round((s / 6) * 100);
 });
 
+// A right-skewed distribution (e.g. household incomes in $k) — shows off bins
+// and formatBin far better than a symmetric bell curve.
+export const incomes = Array.from({ length: 500 }, () => {
+  const u = Math.random();
+  // exponential-ish tail, clamped to a sensible range
+  return Math.round(20 + -Math.log(1 - u) * 35);
+});
+
+// --- radar shape: one record per axis, a value per series --------------------
 export const radar = [
   { axis: 'Speed', team: 80, rival: 60 },
   { axis: 'Power', team: 65, rival: 75 },
@@ -38,6 +96,15 @@ export const radar = [
   { axis: 'Defense', team: 70, rival: 80 },
   { axis: 'Agility', team: 85, rival: 65 },
   { axis: 'Stamina', team: 60, rival: 70 },
+];
+
+export const skills = [
+  { axis: 'React', frontend: 90, backend: 40 },
+  { axis: 'CSS', frontend: 85, backend: 30 },
+  { axis: 'APIs', frontend: 55, backend: 90 },
+  { axis: 'Databases', frontend: 35, backend: 88 },
+  { axis: 'DevOps', frontend: 40, backend: 75 },
+  { axis: 'Testing', frontend: 70, backend: 80 },
 ];
 
 // Preset theme palettes for the global palette control.

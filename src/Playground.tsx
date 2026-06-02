@@ -1,31 +1,51 @@
-import { useEffect, useMemo, useState } from 'react';
-import { charts, chartById } from './registry';
+import { useMemo, useState } from 'react';
+import { charts, chartById, datasetByKey } from './registry';
 import { ControlField, type PropValue } from './controls';
 import { buildSnippet } from './snippet';
 import { palettes } from './data';
 import type { Route } from './useHashRoute';
 
-export function Playground({ chartId, navigate }: { chartId: string; navigate: (r: Route) => void }) {
+export function Playground({
+  chartId,
+  dataset,
+  preset,
+  navigate,
+}: {
+  chartId: string;
+  dataset?: string;
+  preset?: number;
+  navigate: (r: Route) => void;
+}) {
   const def = chartById(chartId) ?? charts[0];
-  const [props, setProps] = useState<Record<string, PropValue>>(def.defaultProps);
+
+  // Starting point — honors an incoming preset (deep-linked from Examples): its
+  // dataset and prop overrides seed the controls. This component is remounted
+  // (via a `key` in App) whenever the chart / dataset / preset changes, so these
+  // initializers double as the reset-on-navigation behavior.
+  const example = preset !== undefined ? def.examples[preset] : undefined;
+  const initialDatasetKey = datasetByKey(def, example?.datasetKey ?? dataset).key;
+  const initialProps = { ...def.defaultProps, ...(example?.props ?? {}) };
+
+  const [datasetKey, setDatasetKey] = useState(initialDatasetKey);
+  const [props, setProps] = useState<Record<string, PropValue>>(initialProps);
   const [paletteIdx, setPaletteIdx] = useState(0);
   const [copied, setCopied] = useState(false);
 
-  // Reset controls when the selected chart changes.
-  useEffect(() => {
-    setProps(def.defaultProps);
-    setPaletteIdx(0);
-  }, [def]);
+  const ds = datasetByKey(def, datasetKey);
 
   const onChange = (key: string, value: PropValue) =>
     setProps((p) => ({ ...p, [key]: value }));
 
   // The palette (when not Default) becomes a real `theme` prop — shown in code too.
-  const themeProp = paletteIdx > 0 ? { theme: { colors: palettes[paletteIdx].colors } } : {};
-  const renderProps = { ...props, ...themeProp };
-  const snippetProps = { ...props, ...themeProp };
+  const renderProps = useMemo(() => {
+    const themeProp = paletteIdx > 0 ? { theme: { colors: palettes[paletteIdx].colors } } : {};
+    return { ...props, ...themeProp };
+  }, [props, paletteIdx]);
 
-  const code = useMemo(() => buildSnippet(def.snippet, snippetProps), [def, snippetProps]);
+  const code = useMemo(
+    () => buildSnippet(def.componentName, ds, renderProps),
+    [def.componentName, ds, renderProps],
+  );
 
   const copy = async () => {
     try {
@@ -35,6 +55,12 @@ export function Playground({ chartId, navigate }: { chartId: string; navigate: (
     } catch {
       /* clipboard may be unavailable */
     }
+  };
+
+  const reset = () => {
+    setDatasetKey(def.datasets[0].key);
+    setProps(def.defaultProps);
+    setPaletteIdx(0);
   };
 
   const Chart = def.Component;
@@ -56,7 +82,7 @@ export function Playground({ chartId, navigate }: { chartId: string; navigate: (
       <div className="play-grid">
         <div className="preview-col">
           <div className="preview">
-            <Chart {...def.fixedProps} {...renderProps} />
+            <Chart {...ds.props} {...renderProps} />
           </div>
 
           <div className="code">
@@ -73,6 +99,21 @@ export function Playground({ chartId, navigate }: { chartId: string; navigate: (
         </div>
 
         <aside className="panel">
+          {def.datasets.length > 1 && (
+            <div className="panel-section">
+              <div className="panel-title">Dataset</div>
+              <label className="ctrl">
+                <select value={datasetKey} onChange={(e) => setDatasetKey(e.target.value)}>
+                  {def.datasets.map((d) => (
+                    <option key={d.key} value={d.key}>
+                      {d.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+          )}
+
           <div className="panel-section">
             <div className="panel-title">Props</div>
             {def.controls.map((ctrl) => (
@@ -98,7 +139,7 @@ export function Playground({ chartId, navigate }: { chartId: string; navigate: (
             </div>
           </div>
 
-          <button className="btn btn-ghost" onClick={() => { setProps(def.defaultProps); setPaletteIdx(0); }}>
+          <button className="btn btn-ghost" onClick={reset}>
             Reset
           </button>
         </aside>

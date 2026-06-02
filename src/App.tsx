@@ -1,6 +1,8 @@
 import './styles.css';
 import { useHashRoute } from './useHashRoute';
 import { Gallery } from './Gallery';
+import { Examples } from './Examples';
+import { Docs } from './Docs';
 import { Playground } from './Playground';
 import { charts } from './registry';
 
@@ -22,6 +24,18 @@ export default function App() {
             Gallery
           </button>
           <button
+            className={route.view === 'examples' ? 'nav-active' : ''}
+            onClick={() => navigate({ view: 'examples' })}
+          >
+            Examples
+          </button>
+          <button
+            className={route.view === 'docs' ? 'nav-active' : ''}
+            onClick={() => navigate({ view: 'docs' })}
+          >
+            Docs
+          </button>
+          <button
             className={route.view === 'playground' ? 'nav-active' : ''}
             onClick={() => navigate({ view: 'playground', chartId: charts[0].id })}
           >
@@ -37,10 +51,17 @@ export default function App() {
       </header>
 
       <main className="main">
-        {route.view === 'gallery' ? (
-          <Gallery navigate={navigate} />
-        ) : (
-          <Playground chartId={route.chartId} navigate={navigate} />
+        {route.view === 'gallery' && <Gallery navigate={navigate} />}
+        {route.view === 'examples' && <Examples navigate={navigate} />}
+        {route.view === 'docs' && <Docs navigate={navigate} />}
+        {route.view === 'playground' && (
+          <Playground
+            key={`${route.chartId}:${route.dataset ?? ''}:${route.preset ?? ''}`}
+            chartId={route.chartId}
+            dataset={route.dataset}
+            preset={route.preset}
+            navigate={navigate}
+          />
         )}
       </main>
 

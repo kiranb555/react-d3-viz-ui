@@ -1,4 +1,6 @@
-// Turn a chart's current props into a copy-paste JSX snippet.
+// Turn a chart's current dataset + props into a copy-paste JSX snippet.
+
+import type { Dataset } from './registry';
 
 function jsonish(v: unknown): string {
   // Compact JSON with unquoted object keys and a space after colons/commas.
@@ -15,28 +17,21 @@ function attr(key: string, value: unknown): string {
   return ` ${key}={${jsonish(value)}}`;
 }
 
-export interface SnippetSpec {
-  componentName: string;
-  /** The `const data = …` lines shown above the JSX. */
-  dataCode: string;
-  /** The data prop rendered verbatim, e.g. `data={data}` or `values={values}`. */
-  dataAttr: string;
-  /** Fixed accessor props (x, value, series, …) serialized as attributes. */
-  accessors: Record<string, unknown>;
-}
+export function buildSnippet(
+  componentName: string,
+  dataset: Dataset,
+  props: Record<string, unknown>,
+): string {
+  // props override accessors of the same key (e.g. a preset that customizes
+  // `series`), so the emitted JSX never carries a duplicate attribute.
+  const merged = { ...dataset.accessors, ...props };
+  const attrs = Object.entries(merged)
+    .map(([k, v]) => attr(k, v))
+    .join('');
 
-export function buildSnippet(spec: SnippetSpec, props: Record<string, unknown>): string {
-  const attrs =
-    Object.entries(spec.accessors)
-      .map(([k, v]) => attr(k, v))
-      .join('') +
-    Object.entries(props)
-      .map(([k, v]) => attr(k, v))
-      .join('');
+  return `import { ${componentName} } from 'react-d3-viz';
 
-  return `import { ${spec.componentName} } from 'react-d3-viz';
+${dataset.dataCode}
 
-${spec.dataCode}
-
-<${spec.componentName} ${spec.dataAttr}${attrs} />`;
+<${componentName} ${dataset.dataAttr}${attrs} />`;
 }
