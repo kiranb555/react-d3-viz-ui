@@ -107,6 +107,58 @@ export const skills = [
   { axis: 'Testing', frontend: 70, backend: 80 },
 ];
 
+// --- treemap shapes: flat (value/label), grouped (+group), nested (children) -
+export const treemapLanguages = [
+  { name: 'JavaScript', value: 38.7 },
+  { name: 'Python', value: 24.5 },
+  { name: 'TypeScript', value: 18.3 },
+  { name: 'Rust', value: 9.1 },
+  { name: 'Go', value: 6.2 },
+  { name: 'Other', value: 3.2 },
+];
+
+export const treemapBrowsers = [
+  { name: 'Chrome', platform: 'Desktop', share: 45 },
+  { name: 'Edge', platform: 'Desktop', share: 12 },
+  { name: 'Firefox', platform: 'Desktop', share: 8 },
+  { name: 'Safari', platform: 'Desktop', share: 10 },
+  { name: 'Chrome Mobile', platform: 'Mobile', share: 38 },
+  { name: 'Safari Mobile', platform: 'Mobile', share: 25 },
+  { name: 'Samsung', platform: 'Mobile', share: 6 },
+];
+
+export const treemapTech = {
+  name: 'tech',
+  children: [
+    {
+      name: 'Frontend',
+      children: [
+        { name: 'React', value: 40 },
+        { name: 'Vue', value: 18 },
+        { name: 'Svelte', value: 9 },
+        { name: 'Angular', value: 14 },
+      ],
+    },
+    {
+      name: 'Backend',
+      children: [
+        { name: 'Node', value: 30 },
+        { name: 'Go', value: 16 },
+        { name: 'Rust', value: 11 },
+        { name: 'Python', value: 26 },
+      ],
+    },
+    {
+      name: 'Data',
+      children: [
+        { name: 'Postgres', value: 22 },
+        { name: 'Redis', value: 10 },
+        { name: 'Kafka', value: 8 },
+      ],
+    },
+  ],
+};
+
 // Preset theme palettes for the global palette control.
 export const palettes: { name: string; colors: string[] }[] = [
   { name: 'Default', colors: ['#4f46e5', '#06b6d4', '#f59e0b', '#ef4444', '#10b981', '#8b5cf6'] },

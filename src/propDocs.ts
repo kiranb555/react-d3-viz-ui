@@ -111,6 +111,25 @@ const radarProps: PropDoc[] = [
   { name: 'animate', type: 'boolean', default: 'true', description: 'Disable the enter animation when false.' },
 ];
 
+const treemapProps: PropDoc[] = [
+  { name: 'data', type: 'Datum[] | Datum', default: '—', description: 'A flat array of records, or a single nested root record. Required.' },
+  { name: 'value', type: 'string | (d) => number', default: '—', description: "Accessor for each cell's numeric value (size). Required." },
+  { name: 'label', type: 'string | (d) => unknown', default: '—', description: 'Accessor for each cell label (text inside the cell + tooltip).' },
+  { name: 'group', type: 'string | (d) => unknown', default: '—', description: 'Flat data only: group records into a 2-level treemap, colored by group.' },
+  { name: 'childrenKey', type: 'string | (d) => Datum[]', default: "'children'", description: "Nested data only: how to read a record's children (key or function)." },
+  { name: 'padding', type: 'number', default: '1', description: 'Gap between cells, in px.' },
+  { name: 'paddingTop', type: 'number', default: 'auto', description: 'Header band height for groups (grouped mode auto-uses 18).' },
+  { name: 'colors', type: 'string[]', default: 'palette', description: 'Override the categorical palette.' },
+  { name: 'showLabels', type: 'boolean', default: 'true', description: 'Show labels inside cells (hidden when a cell is too small).' },
+  { name: 'showValues', type: 'boolean', default: 'false', description: 'Show the value beneath the label.' },
+  { name: 'showLegend', type: 'boolean', default: 'true', description: 'Show the interactive legend.' },
+  { name: 'showTooltip', type: 'boolean', default: 'true', description: 'Enable the hover / touch tooltip.' },
+  { name: 'valueFormat', type: '(value) => string', default: 'toLocaleString', description: 'Format the numeric value shown in labels / tooltip.' },
+  { name: 'height', type: "number | 'auto'", default: '300', description: "Pixel height, or 'auto' to derive from width via aspect (1.6)." },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Disable the enter animation when false.' },
+];
+
 /** Prop reference keyed by chart id (matches registry ids). */
 export const propDocs: Record<string, PropDoc[]> = {
   line: [...cartesianProps, ...lineExtra],
@@ -121,4 +140,5 @@ export const propDocs: Record<string, PropDoc[]> = {
   pie: pieProps,
   histogram: histogramProps,
   radar: radarProps,
+  treemap: treemapProps,
 };

@@ -8,6 +8,7 @@ import {
   PieChart,
   Histogram,
   RadarChart,
+  TreemapChart,
 } from 'react-d3-viz';
 import {
   months,
@@ -22,6 +23,9 @@ import {
   incomes,
   radar,
   skills,
+  treemapLanguages,
+  treemapBrowsers,
+  treemapTech,
 } from './data';
 import type { Control } from './controls';
 
@@ -281,6 +285,53 @@ const radarDatasets: Dataset[] = [
   },
 ];
 
+// --- treemap-shape datasets (flat / grouped / nested) ------------------------
+const treemapFlatCode = `const data = [
+  { name: 'JavaScript', value: 38.7 },
+  { name: 'Python', value: 24.5 },
+  // …4 more
+];`;
+const treemapGroupedCode = `const data = [
+  { name: 'Chrome', platform: 'Desktop', share: 45 },
+  { name: 'Safari Mobile', platform: 'Mobile', share: 25 },
+  // …5 more, grouped by platform
+];`;
+const treemapNestedCode = `const data = {
+  name: 'tech',
+  children: [
+    { name: 'Frontend', children: [{ name: 'React', value: 40 }, /* … */] },
+    { name: 'Backend', children: [{ name: 'Node', value: 30 }, /* … */] },
+    // …
+  ],
+};`;
+
+const treemapDatasets: Dataset[] = [
+  {
+    key: 'flat',
+    name: 'Languages (flat)',
+    props: { data: treemapLanguages, value: 'value', label: 'name' },
+    dataCode: treemapFlatCode,
+    dataAttr: 'data={data}',
+    accessors: { value: 'value', label: 'name' },
+  },
+  {
+    key: 'grouped',
+    name: 'Browsers (grouped)',
+    props: { data: treemapBrowsers, value: 'share', label: 'name', group: 'platform' },
+    dataCode: treemapGroupedCode,
+    dataAttr: 'data={data}',
+    accessors: { value: 'share', label: 'name', group: 'platform' },
+  },
+  {
+    key: 'nested',
+    name: 'Tech (nested)',
+    props: { data: treemapTech, value: 'value', label: 'name', childrenKey: 'children' },
+    dataCode: treemapNestedCode,
+    dataAttr: 'data={data}',
+    accessors: { value: 'value', label: 'name', childrenKey: 'children' },
+  },
+];
+
 export const charts: ChartDef[] = [
   {
     id: 'line',
@@ -441,6 +492,30 @@ export const charts: ChartDef[] = [
       { title: 'Team vs rival', description: 'Two polygons across six axes.', props: {} },
       { title: 'Skills profile', description: 'Frontend vs backend strengths.', datasetKey: 'skills', props: {} },
       { title: 'More rings', description: 'Six grid levels for finer reading.', props: { levels: 6 } },
+    ],
+  },
+  {
+    id: 'treemap',
+    title: 'Treemap',
+    blurb: 'Nested rectangles sized by value — flat, grouped, or a full hierarchy.',
+    componentName: 'TreemapChart',
+    Component: TreemapChart,
+    datasets: treemapDatasets,
+    defaultProps: { height: 340, padding: 1, showLabels: true, showValues: true, showLegend: true, showTooltip: true, animate: true },
+    controls: [
+      heightCtrl,
+      { key: 'padding', label: 'padding', type: 'number', min: 0, max: 8, step: 1 },
+      { key: 'showLabels', label: 'showLabels', type: 'boolean' },
+      { key: 'showValues', label: 'showValues', type: 'boolean' },
+      { key: 'showTooltip', label: 'showTooltip', type: 'boolean' },
+      legendCtrl,
+      animateCtrl,
+    ],
+    examples: [
+      { title: 'Flat', description: 'One rectangle per record, sized by value.', datasetKey: 'flat', props: {} },
+      { title: 'Grouped', description: 'Two-level treemap colored by group, with header bands.', datasetKey: 'grouped', props: {} },
+      { title: 'Nested hierarchy', description: 'A deep hierarchy; leaves colored by their top-level branch (flare style).', datasetKey: 'nested', props: {} },
+      { title: 'No labels', description: 'Hide cell labels for a pure heatmap look.', datasetKey: 'nested', props: { showLabels: false } },
     ],
   },
 ];
