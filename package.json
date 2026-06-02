@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "react": "^19.2.6",
-    "react-d3-viz": "^1.0.0",
+    "react-d3-viz": "^1.0.1",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
