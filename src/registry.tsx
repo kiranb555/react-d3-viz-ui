@@ -9,6 +9,9 @@ import {
   Histogram,
   RadarChart,
   TreemapChart,
+  WaterfallChart,
+  SankeyDiagram,
+  MekkoChart,
 } from 'react-d3-viz';
 import {
   months,
@@ -26,6 +29,12 @@ import {
   treemapLanguages,
   treemapBrowsers,
   treemapTech,
+  waterfallRevenue,
+  waterfallQuarters,
+  sankeyBasic,
+  sankeyComplex,
+  mekkoBasic,
+  mekkoMarket,
 } from './data';
 import type { Control } from './controls';
 
@@ -332,6 +341,152 @@ const treemapDatasets: Dataset[] = [
   },
 ];
 
+// --- waterfall datasets ------------------------------------------------------
+const waterfallRevenueCode = `const data = [
+  { label: 'Start', value: 100 },
+  { label: 'Revenue', value: 50 },
+  { label: 'Costs', value: -20 },
+  { label: 'Net Income', value: 130, isTotal: true },
+];`;
+
+const waterfallQuartersCode = `const data = [
+  { label: 'Q1 Revenue', value: 100 },
+  { label: 'Q2 Revenue', value: 120 },
+  { label: 'H1 Total', value: 220, isTotal: true },
+  { label: 'Costs', value: -50 },
+  { label: 'H1 Net', value: 170, isTotal: true },
+];`;
+
+const waterfallDatasets: Dataset[] = [
+  {
+    key: 'revenue',
+    name: 'Revenue flow',
+    props: { data: waterfallRevenue },
+    dataCode: waterfallRevenueCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+  {
+    key: 'quarters',
+    name: 'Quarterly breakdown',
+    props: { data: waterfallQuarters },
+    dataCode: waterfallQuartersCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+];
+
+// --- sankey datasets ---------------------------------------------------------
+const sankeyBasicCode = `const data = {
+  nodes: [
+    { id: 'a', label: 'Source A' },
+    { id: 'b', label: 'Source B' },
+    { id: 'x', label: 'Sink X' },
+    { id: 'y', label: 'Sink Y' },
+  ],
+  links: [
+    { source: 'a', target: 'x', value: 30 },
+    { source: 'a', target: 'y', value: 20 },
+    { source: 'b', target: 'x', value: 40 },
+    { source: 'b', target: 'y', value: 60 },
+  ],
+};`;
+
+const sankeyComplexCode = `const data = {
+  nodes: [
+    { id: 'sales', label: 'Sales' },
+    { id: 'marketing', label: 'Marketing' },
+    { id: 'product-a', label: 'Product A' },
+    { id: 'product-b', label: 'Product B' },
+    // ...more nodes
+  ],
+  links: [
+    { source: 'sales', target: 'product-a', value: 50 },
+    { source: 'marketing', target: 'product-b', value: 30 },
+    // ...more links
+  ],
+};`;
+
+const sankeyDatasets: Dataset[] = [
+  {
+    key: 'simple',
+    name: 'Simple flow',
+    props: { data: sankeyBasic },
+    dataCode: sankeyBasicCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+  {
+    key: 'complex',
+    name: 'Complex network',
+    props: { data: sankeyComplex },
+    dataCode: sankeyComplexCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+];
+
+// --- mekko datasets ----------------------------------------------------------
+const mekkoBasicCode = `const data = {
+  categories: [
+    { label: 'Q1', value: 100 },
+    { label: 'Q2', value: 150 },
+    { label: 'Q3', value: 120 },
+  ],
+  series: [
+    {
+      id: 'product-a',
+      label: 'Product A',
+      data: [
+        { categoryId: 'Q1', value: 40 },
+        { categoryId: 'Q2', value: 60 },
+        { categoryId: 'Q3', value: 50 },
+      ],
+    },
+    // ...more series
+  ],
+};`;
+
+const mekkoMarketCode = `const data = {
+  categories: [
+    { label: 'North America', value: 500 },
+    { label: 'Europe', value: 350 },
+    { label: 'Asia', value: 600 },
+    { label: 'Other', value: 150 },
+  ],
+  series: [
+    {
+      id: 'premium',
+      label: 'Premium',
+      data: [
+        { categoryId: 'North America', value: 250 },
+        { categoryId: 'Europe', value: 200 },
+        // ...more categories
+      ],
+    },
+    // ...more series
+  ],
+};`;
+
+const mekkoDatasets: Dataset[] = [
+  {
+    key: 'quarterly',
+    name: 'Quarterly products',
+    props: { data: mekkoBasic },
+    dataCode: mekkoBasicCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+  {
+    key: 'market',
+    name: 'Market segments',
+    props: { data: mekkoMarket },
+    dataCode: mekkoMarketCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+];
+
 export const charts: ChartDef[] = [
   {
     id: 'line',
@@ -516,6 +671,60 @@ export const charts: ChartDef[] = [
       { title: 'Grouped', description: 'Two-level treemap colored by group, with header bands.', datasetKey: 'grouped', props: {} },
       { title: 'Nested hierarchy', description: 'A deep hierarchy; leaves colored by their top-level branch (flare style).', datasetKey: 'nested', props: {} },
       { title: 'No labels', description: 'Hide cell labels for a pure heatmap look.', datasetKey: 'nested', props: { showLabels: false } },
+    ],
+  },
+  {
+    id: 'waterfall',
+    title: 'Waterfall',
+    blurb: 'Shows cumulative effect of sequential positive and negative values.',
+    componentName: 'WaterfallChart',
+    Component: WaterfallChart,
+    datasets: waterfallDatasets,
+    defaultProps: { height: 320, animate: true },
+    controls: [
+      heightCtrl,
+      animateCtrl,
+    ],
+    examples: [
+      { title: 'Revenue flow', description: 'Basic revenue with costs and net income.', datasetKey: 'revenue', props: {} },
+      { title: 'Multi-step', description: 'Quarterly breakdown with subtotals.', datasetKey: 'quarters', props: {} },
+      { title: 'Custom formatter', description: 'Format values with custom function.', datasetKey: 'revenue', props: { valueFormatter: (v: number) => `$${v}k` } },
+    ],
+  },
+  {
+    id: 'sankey',
+    title: 'Sankey',
+    blurb: 'Shows flow relationships from sources to targets with proportional link widths.',
+    componentName: 'SankeyDiagram',
+    Component: SankeyDiagram,
+    datasets: sankeyDatasets,
+    defaultProps: { height: 360, animate: true },
+    controls: [
+      heightCtrl,
+      animateCtrl,
+    ],
+    examples: [
+      { title: 'Simple flow', description: 'Two sources to two sinks.', datasetKey: 'simple', props: {} },
+      { title: 'Complex network', description: 'Multi-layer flow with many connections.', datasetKey: 'complex', props: {} },
+      { title: 'Custom colors', description: 'Per-node color override.', datasetKey: 'simple', props: { nodeColors: { a: '#ff6b6b', b: '#4ecdc4', x: '#45b7d1', y: '#96ceb4' } } },
+    ],
+  },
+  {
+    id: 'mekko',
+    title: 'Mekko',
+    blurb: 'Categories as columns with width proportional to value, series stacked within.',
+    componentName: 'MekkoChart',
+    Component: MekkoChart,
+    datasets: mekkoDatasets,
+    defaultProps: { height: 320, animate: true },
+    controls: [
+      heightCtrl,
+      animateCtrl,
+    ],
+    examples: [
+      { title: 'Quarterly products', description: 'Product mix across quarters.', datasetKey: 'quarterly', props: {} },
+      { title: 'Market segments', description: 'Revenue by region and tier.', datasetKey: 'market', props: {} },
+      { title: 'Custom formatters', description: 'Format categories and values.', datasetKey: 'quarterly', props: { categoryLabelFormatter: (l: string) => `Q${l}`, valueFormatter: (v: number) => `${v}M` } },
     ],
   },
 ];
