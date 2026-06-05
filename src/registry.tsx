@@ -9,6 +9,9 @@ import {
   Histogram,
   RadarChart,
   TreemapChart,
+  WaterfallChart,
+  MekkoChart,
+  SankeyDiagram,
 } from 'react-d3-viz';
 import {
   months,
@@ -26,6 +29,12 @@ import {
   treemapLanguages,
   treemapBrowsers,
   treemapTech,
+  waterfallRevenueData,
+  waterfallProjectData,
+  mekkoSalesData,
+  mekkoProductData,
+  sankeySampleData,
+  sankeySupplyData,
 } from './data';
 import type { Control } from './controls';
 
@@ -332,6 +341,134 @@ const treemapDatasets: Dataset[] = [
   },
 ];
 
+// --- waterfall-shape datasets (cumulative + negatives) -------------------------
+const waterfallRevenueCode = `const data = [
+  { label: 'Starting Revenue', value: 420 },
+  { label: 'Product Sales', value: 220 },
+  { label: 'Service Revenue', value: 150 },
+  { label: 'Operating Costs', value: -180 },
+  { label: 'Marketing', value: -80 },
+  { label: 'Net Income', value: 530, isTotal: true },
+];`;
+const waterfallProjectCode = `const data = [
+  { label: 'Q1', value: 100 },
+  { label: 'Q2', value: 150 },
+  { label: 'Q3', value: -50 },
+  { label: 'Q4', value: 200 },
+  { label: 'Year Total', value: 400, isTotal: true },
+];`;
+
+const waterfallDatasets: Dataset[] = [
+  {
+    key: 'revenue',
+    name: 'Revenue flow',
+    props: { data: waterfallRevenueData },
+    dataCode: waterfallRevenueCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+  {
+    key: 'quarterly',
+    name: 'Quarterly results',
+    props: { data: waterfallProjectData },
+    dataCode: waterfallProjectCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+];
+
+// --- mekko-shape datasets (categories + stacked series) -------------------------
+const mekkoSalesCode = `const data = {
+  categories: [
+    { label: 'North America', value: 320 },
+    { label: 'Europe', value: 280 },
+    { label: 'Asia', value: 420 },
+  ],
+  series: [
+    { id: 'online', label: 'Online', data: [
+      { categoryId: 'northAmerica', value: 200 },
+      /* … */
+    ]},
+    /* … */
+  ],
+};`;
+const mekkoProductCode = `const data = {
+  categories: [
+    { label: 'Starter', value: 200 },
+    { label: 'Pro', value: 350 },
+    { label: 'Enterprise', value: 450 },
+  ],
+  series: [
+    { id: 'features', label: 'Features', data: [
+      { categoryId: 'starter', value: 80 },
+      /* … */
+    ]},
+    /* … */
+  ],
+};`;
+
+const mekkoDatasets: Dataset[] = [
+  {
+    key: 'sales',
+    name: 'Sales by region',
+    props: { data: mekkoSalesData },
+    dataCode: mekkoSalesCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+  {
+    key: 'product',
+    name: 'Product pricing',
+    props: { data: mekkoProductData },
+    dataCode: mekkoProductCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+];
+
+// --- sankey-shape datasets (nodes + links) -------------------------------------
+const sankeySampleCode = `const data = {
+  nodes: [
+    { id: 'browser', label: 'Browser' },
+    { id: 'chrome', label: 'Chrome' },
+    /* … */
+  ],
+  links: [
+    { source: 'browser', target: 'chrome', value: 500 },
+    /* … */
+  ],
+};`;
+const sankeySupplyCode = `const data = {
+  nodes: [
+    { id: 'supplier1', label: 'Supplier A' },
+    { id: 'warehouse', label: 'Warehouse' },
+    /* … */
+  ],
+  links: [
+    { source: 'supplier1', target: 'warehouse', value: 600 },
+    /* … */
+  ],
+};`;
+
+const sankeyDatasets: Dataset[] = [
+  {
+    key: 'browser',
+    name: 'Browser & OS flow',
+    props: { data: sankeySampleData },
+    dataCode: sankeySampleCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+  {
+    key: 'supply',
+    name: 'Supply chain',
+    props: { data: sankeySupplyData },
+    dataCode: sankeySupplyCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+];
+
 export const charts: ChartDef[] = [
   {
     id: 'line',
@@ -516,6 +653,57 @@ export const charts: ChartDef[] = [
       { title: 'Grouped', description: 'Two-level treemap colored by group, with header bands.', datasetKey: 'grouped', props: {} },
       { title: 'Nested hierarchy', description: 'A deep hierarchy; leaves colored by their top-level branch (flare style).', datasetKey: 'nested', props: {} },
       { title: 'No labels', description: 'Hide cell labels for a pure heatmap look.', datasetKey: 'nested', props: { showLabels: false } },
+    ],
+  },
+  {
+    id: 'waterfall',
+    title: 'Waterfall',
+    blurb: 'Shows cumulative effect of sequential positive and negative values with connectors.',
+    componentName: 'WaterfallChart',
+    Component: WaterfallChart,
+    datasets: waterfallDatasets,
+    defaultProps: { height: 320, animate: true },
+    controls: [
+      heightCtrl,
+      animateCtrl,
+    ],
+    examples: [
+      { title: 'Revenue flow', description: 'Income statement from starting revenue to net income.', datasetKey: 'revenue', props: {} },
+      { title: 'Quarterly results', description: 'Year-on-year quarterly performance with total.', datasetKey: 'quarterly', props: {} },
+    ],
+  },
+  {
+    id: 'mekko',
+    title: 'Mekko',
+    blurb: 'Categories as columns with width proportional to their values, series stacked within.',
+    componentName: 'MekkoChart',
+    Component: MekkoChart,
+    datasets: mekkoDatasets,
+    defaultProps: { height: 320, animate: true },
+    controls: [
+      heightCtrl,
+      animateCtrl,
+    ],
+    examples: [
+      { title: 'Sales by region', description: 'Online vs retail across three regions.', datasetKey: 'sales', props: {} },
+      { title: 'Product pricing', description: 'Three pricing tiers with feature breakdown.', datasetKey: 'product', props: {} },
+    ],
+  },
+  {
+    id: 'sankey',
+    title: 'Sankey',
+    blurb: 'Flow diagram showing connections between nodes with proportional link widths.',
+    componentName: 'SankeyDiagram',
+    Component: SankeyDiagram,
+    datasets: sankeyDatasets,
+    defaultProps: { height: 400, animate: true },
+    controls: [
+      heightCtrl,
+      animateCtrl,
+    ],
+    examples: [
+      { title: 'Browser & OS flow', description: 'User distribution across browsers and operating systems.', datasetKey: 'browser', props: {} },
+      { title: 'Supply chain', description: 'Product flow from suppliers through warehouse to customers.', datasetKey: 'supply', props: {} },
     ],
   },
 ];

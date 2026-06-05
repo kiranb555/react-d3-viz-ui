@@ -159,6 +159,136 @@ export const treemapTech = {
   ],
 };
 
+// --- waterfall shape: sequentially introduced values with optional totals -----
+export const waterfallRevenueData = [
+  { label: 'Starting Revenue', value: 420, isTotal: false },
+  { label: 'Product Sales', value: 220, isTotal: false },
+  { label: 'Service Revenue', value: 150, isTotal: false },
+  { label: 'Operating Costs', value: -180, isTotal: false },
+  { label: 'Marketing', value: -80, isTotal: false },
+  { label: 'Net Income', value: 530, isTotal: true },
+];
+
+export const waterfallProjectData = [
+  { label: 'Q1', value: 100 },
+  { label: 'Q2', value: 150 },
+  { label: 'Q3', value: -50 },
+  { label: 'Q4', value: 200 },
+  { label: 'Year Total', value: 400, isTotal: true },
+];
+
+// --- mekko shape: categories with stacked series ---------------------------------
+export const mekkoSalesData = {
+  categories: [
+    { label: 'North America', value: 320 },
+    { label: 'Europe', value: 280 },
+    { label: 'Asia', value: 420 },
+  ],
+  series: [
+    {
+      id: 'online',
+      label: 'Online',
+      data: [
+        { categoryId: 'northAmerica', value: 200 },
+        { categoryId: 'europe', value: 160 },
+        { categoryId: 'asia', value: 280 },
+      ],
+    },
+    {
+      id: 'retail',
+      label: 'Retail',
+      data: [
+        { categoryId: 'northAmerica', value: 120 },
+        { categoryId: 'europe', value: 120 },
+        { categoryId: 'asia', value: 140 },
+      ],
+    },
+  ],
+};
+
+export const mekkoProductData = {
+  categories: [
+    { label: 'Starter', value: 200 },
+    { label: 'Pro', value: 350 },
+    { label: 'Enterprise', value: 450 },
+  ],
+  series: [
+    {
+      id: 'features',
+      label: 'Features',
+      data: [
+        { categoryId: 'starter', value: 80 },
+        { categoryId: 'pro', value: 200 },
+        { categoryId: 'enterprise', value: 350 },
+      ],
+    },
+    {
+      id: 'support',
+      label: 'Support',
+      data: [
+        { categoryId: 'starter', value: 50 },
+        { categoryId: 'pro', value: 100 },
+        { categoryId: 'enterprise', value: 80 },
+      ],
+    },
+    {
+      id: 'services',
+      label: 'Services',
+      data: [
+        { categoryId: 'starter', value: 70 },
+        { categoryId: 'pro', value: 50 },
+        { categoryId: 'enterprise', value: 20 },
+      ],
+    },
+  ],
+};
+
+// --- sankey shape: nodes and directed links with flow values --------------------
+export const sankeySampleData = {
+  nodes: [
+    { id: 'browser', label: 'Browser' },
+    { id: 'device', label: 'Device' },
+    { id: 'os', label: 'OS' },
+    { id: 'chrome', label: 'Chrome' },
+    { id: 'safari', label: 'Safari' },
+    { id: 'firefox', label: 'Firefox' },
+    { id: 'windows', label: 'Windows' },
+    { id: 'macos', label: 'macOS' },
+    { id: 'linux', label: 'Linux' },
+  ],
+  links: [
+    { source: 'browser', target: 'chrome', value: 500 },
+    { source: 'browser', target: 'safari', value: 350 },
+    { source: 'browser', target: 'firefox', value: 200 },
+    { source: 'chrome', target: 'windows', value: 300 },
+    { source: 'chrome', target: 'macos', value: 150 },
+    { source: 'chrome', target: 'linux', value: 50 },
+    { source: 'safari', target: 'macos', value: 300 },
+    { source: 'safari', target: 'windows', value: 50 },
+    { source: 'firefox', target: 'windows', value: 120 },
+    { source: 'firefox', target: 'linux', value: 80 },
+  ],
+};
+
+export const sankeySupplyData = {
+  nodes: [
+    { id: 'supplier1', label: 'Supplier A' },
+    { id: 'supplier2', label: 'Supplier B' },
+    { id: 'warehouse', label: 'Warehouse' },
+    { id: 'retail', label: 'Retail' },
+    { id: 'online', label: 'Online' },
+    { id: 'customer', label: 'Customer' },
+  ],
+  links: [
+    { source: 'supplier1', target: 'warehouse', value: 600 },
+    { source: 'supplier2', target: 'warehouse', value: 400 },
+    { source: 'warehouse', target: 'retail', value: 500 },
+    { source: 'warehouse', target: 'online', value: 500 },
+    { source: 'retail', target: 'customer', value: 500 },
+    { source: 'online', target: 'customer', value: 500 },
+  ],
+};
+
 // Preset theme palettes for the global palette control.
 export const palettes: { name: string; colors: string[] }[] = [
   { name: 'Default', colors: ['#4f46e5', '#06b6d4', '#f59e0b', '#ef4444', '#10b981', '#8b5cf6'] },
