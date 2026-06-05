@@ -131,40 +131,40 @@ const treemapProps: PropDoc[] = [
 ];
 
 const waterfallProps: PropDoc[] = [
-  { name: 'data', type: 'WaterfallDataPoint[]', default: '—', description: 'Array of data points with label, value, and optional isTotal flag. Required.' },
-  { name: 'width', type: "number | 'auto'", default: "'auto'", description: 'Pixel width, or auto to fill the parent and re-flow on resize.' },
-  { name: 'height', type: "number | 'auto'", default: '300', description: "Pixel height, or 'auto' to derive from width via `aspect`." },
-  { name: 'aspect', type: 'number', default: '1.33', description: 'width / height ratio used when height is auto.' },
+  { name: 'data', type: 'WaterfallDataPoint[]', default: '—', description: 'Array of data points with label and value. Required.' },
+  { name: 'width', type: "number | 'auto'", default: "'auto'", description: 'Pixel width, or auto to fill the parent.' },
+  { name: 'height', type: "number | 'auto'", default: '300', description: "Pixel height, or 'auto' to derive from width via aspect." },
+  { name: 'aspect', type: 'number', default: '1.33', description: 'width / height ratio when height is auto.' },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
   { name: 'colors', type: 'string[]', default: 'palette', description: 'Override the categorical palette.' },
-  { name: 'animate', type: 'boolean', default: 'true', description: 'Disable the enter animation when false.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Show animations.' },
   { name: 'valueFormatter', type: '(value: number) => string', default: '—', description: 'Format the numeric values displayed.' },
-  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
-];
-
-const mekkoProps: PropDoc[] = [
-  { name: 'data', type: 'MekkoData', default: '—', description: 'Object with categories and series arrays. Required.' },
-  { name: 'width', type: "number | 'auto'", default: "'auto'", description: 'Pixel width, or auto to fill the parent and re-flow on resize.' },
-  { name: 'height', type: "number | 'auto'", default: '300', description: "Pixel height, or 'auto' to derive from width via `aspect`." },
-  { name: 'aspect', type: 'number', default: '1.33', description: 'width / height ratio used when height is auto.' },
-  { name: 'margin', type: 'Partial<Margin>', default: 'DEFAULT_MARGIN', description: 'Override the chart margins.' },
-  { name: 'colors', type: 'string[]', default: 'palette', description: 'Override the categorical palette.' },
-  { name: 'animate', type: 'boolean', default: 'true', description: 'Disable the enter animation when false.' },
-  { name: 'categoryLabelFormatter', type: '(label: string) => string', default: '—', description: 'Format category labels.' },
-  { name: 'valueFormatter', type: '(value: number) => string', default: '—', description: 'Format numeric values.' },
-  { name: 'onSegmentHover', type: '(seriesId: string | null) => void', default: '—', description: 'Callback when a segment is hovered.' },
-  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
 ];
 
 const sankeyProps: PropDoc[] = [
-  { name: 'data', type: 'SankeyData', default: '—', description: 'Object with nodes and links arrays defining the flow. Required.' },
-  { name: 'width', type: "number | 'auto'", default: "'auto'", description: 'Pixel width, or auto to fill the parent and re-flow on resize.' },
-  { name: 'height', type: "number | 'auto'", default: '300', description: "Pixel height, or 'auto' to derive from width via `aspect`." },
-  { name: 'aspect', type: 'number', default: '1.33', description: 'width / height ratio used when height is auto.' },
-  { name: 'margin', type: 'Partial<Margin>', default: 'DEFAULT_MARGIN', description: 'Override the chart margins.' },
-  { name: 'colors', type: 'string[]', default: 'palette', description: 'Override the categorical palette.' },
-  { name: 'animate', type: 'boolean', default: 'true', description: 'Disable the enter animation when false.' },
-  { name: 'nodeColors', type: 'Record<string | number, string>', default: '—', description: 'Override color per node ID.' },
+  { name: 'data', type: 'SankeyData', default: '—', description: 'Nodes and links defining the Sankey flow. Required.' },
+  { name: 'width', type: "number | 'auto'", default: "'auto'", description: 'Pixel width, or auto to fill the parent.' },
+  { name: 'height', type: "number | 'auto'", default: '300', description: "Pixel height, or 'auto' to derive from width via aspect." },
+  { name: 'aspect', type: 'number', default: '1.33', description: 'width / height ratio when height is auto.' },
+  { name: 'margin', type: 'Partial<Margin>', default: '{ top: 20, right: 20, bottom: 20, left: 20 }', description: 'Chart margin.' },
   { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
+  { name: 'colors', type: 'string[]', default: 'palette', description: 'Override the categorical palette.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Show animations.' },
+  { name: 'nodeColors', type: 'Record<string | number, string>', default: '{}', description: 'Optional custom colors per node ID.' },
+];
+
+const mekkoProps: PropDoc[] = [
+  { name: 'data', type: 'MekkoData', default: '—', description: 'Data with categories and series. Required.' },
+  { name: 'width', type: "number | 'auto'", default: "'auto'", description: 'Pixel width, or auto to fill the parent.' },
+  { name: 'height', type: "number | 'auto'", default: '300', description: "Pixel height, or 'auto' to derive from width via aspect." },
+  { name: 'aspect', type: 'number', default: '1.33', description: 'width / height ratio when height is auto.' },
+  { name: 'margin', type: 'Partial<Margin>', default: '{ top: 20, right: 20, bottom: 40, left: 60 }', description: 'Chart margins.' },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
+  { name: 'colors', type: 'string[]', default: 'palette', description: 'Override the categorical palette.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Show animations.' },
+  { name: 'categoryLabelFormatter', type: '(label: string) => string', default: '—', description: 'Format category labels.' },
+  { name: 'valueFormatter', type: '(value: number) => string', default: '—', description: 'Format numeric values.' },
+  { name: 'onSegmentHover', type: '(seriesId: string | null) => void', default: '—', description: 'Callback on segment hover.' },
 ];
 
 /** Prop reference keyed by chart id (matches registry ids). */
@@ -179,6 +179,6 @@ export const propDocs: Record<string, PropDoc[]> = {
   radar: radarProps,
   treemap: treemapProps,
   waterfall: waterfallProps,
-  mekko: mekkoProps,
   sankey: sankeyProps,
+  mekko: mekkoProps,
 };

@@ -159,133 +159,132 @@ export const treemapTech = {
   ],
 };
 
-// --- waterfall shape: sequentially introduced values with optional totals -----
-export const waterfallRevenueData = [
-  { label: 'Starting Revenue', value: 420, isTotal: false },
-  { label: 'Product Sales', value: 220, isTotal: false },
-  { label: 'Service Revenue', value: 150, isTotal: false },
-  { label: 'Operating Costs', value: -180, isTotal: false },
-  { label: 'Marketing', value: -80, isTotal: false },
-  { label: 'Net Income', value: 530, isTotal: true },
+// --- waterfall shape: label + value (with optional isTotal) -------------------
+export const waterfallRevenue = [
+  { label: 'Start', value: 100 },
+  { label: 'Revenue', value: 50 },
+  { label: 'Costs', value: -20 },
+  { label: 'Net Income', value: 130, isTotal: true },
 ];
 
-export const waterfallProjectData = [
-  { label: 'Q1', value: 100 },
-  { label: 'Q2', value: 150 },
-  { label: 'Q3', value: -50 },
-  { label: 'Q4', value: 200 },
-  { label: 'Year Total', value: 400, isTotal: true },
+export const waterfallQuarters = [
+  { label: 'Q1 Revenue', value: 100 },
+  { label: 'Q2 Revenue', value: 120 },
+  { label: 'H1 Total', value: 220, isTotal: true },
+  { label: 'Costs', value: -50 },
+  { label: 'H1 Net', value: 170, isTotal: true },
 ];
 
-// --- mekko shape: categories with stacked series ---------------------------------
-export const mekkoSalesData = {
+// --- sankey shape: nodes and links (flow diagram) ----------------------------
+export const sankeyBasic = {
+  nodes: [
+    { id: 'a', label: 'Source A' },
+    { id: 'b', label: 'Source B' },
+    { id: 'x', label: 'Sink X' },
+    { id: 'y', label: 'Sink Y' },
+  ],
+  links: [
+    { source: 'a', target: 'x', value: 30 },
+    { source: 'a', target: 'y', value: 20 },
+    { source: 'b', target: 'x', value: 40 },
+    { source: 'b', target: 'y', value: 60 },
+  ],
+};
+
+export const sankeyComplex = {
+  nodes: [
+    { id: 'sales', label: 'Sales' },
+    { id: 'marketing', label: 'Marketing' },
+    { id: 'support', label: 'Support' },
+    { id: 'product-a', label: 'Product A' },
+    { id: 'product-b', label: 'Product B' },
+    { id: 'product-c', label: 'Product C' },
+    { id: 'retained', label: 'Retained Revenue' },
+    { id: 'churn', label: 'Churn' },
+  ],
+  links: [
+    { source: 'sales', target: 'product-a', value: 50 },
+    { source: 'sales', target: 'product-b', value: 40 },
+    { source: 'marketing', target: 'product-a', value: 30 },
+    { source: 'marketing', target: 'product-c', value: 50 },
+    { source: 'support', target: 'product-b', value: 20 },
+    { source: 'support', target: 'product-c', value: 30 },
+    { source: 'product-a', target: 'retained', value: 70 },
+    { source: 'product-a', target: 'churn', value: 10 },
+    { source: 'product-b', target: 'retained', value: 55 },
+    { source: 'product-b', target: 'churn', value: 5 },
+    { source: 'product-c', target: 'retained', value: 75 },
+    { source: 'product-c', target: 'churn', value: 5 },
+  ],
+};
+
+// --- mekko shape: categories with series breakdown ---------------------------
+export const mekkoBasic = {
   categories: [
-    { label: 'North America', value: 320 },
-    { label: 'Europe', value: 280 },
-    { label: 'Asia', value: 420 },
+    { label: 'Q1', value: 100 },
+    { label: 'Q2', value: 150 },
+    { label: 'Q3', value: 120 },
   ],
   series: [
     {
-      id: 'online',
-      label: 'Online',
+      id: 'product-a',
+      label: 'Product A',
       data: [
-        { categoryId: 'northAmerica', value: 200 },
-        { categoryId: 'europe', value: 160 },
-        { categoryId: 'asia', value: 280 },
+        { categoryId: 'Q1', value: 40 },
+        { categoryId: 'Q2', value: 60 },
+        { categoryId: 'Q3', value: 50 },
       ],
     },
     {
-      id: 'retail',
-      label: 'Retail',
+      id: 'product-b',
+      label: 'Product B',
       data: [
-        { categoryId: 'northAmerica', value: 120 },
-        { categoryId: 'europe', value: 120 },
-        { categoryId: 'asia', value: 140 },
+        { categoryId: 'Q1', value: 60 },
+        { categoryId: 'Q2', value: 90 },
+        { categoryId: 'Q3', value: 70 },
       ],
     },
   ],
 };
 
-export const mekkoProductData = {
+export const mekkoMarket = {
   categories: [
-    { label: 'Starter', value: 200 },
-    { label: 'Pro', value: 350 },
-    { label: 'Enterprise', value: 450 },
+    { label: 'North America', value: 500 },
+    { label: 'Europe', value: 350 },
+    { label: 'Asia', value: 600 },
+    { label: 'Other', value: 150 },
   ],
   series: [
     {
-      id: 'features',
-      label: 'Features',
+      id: 'premium',
+      label: 'Premium',
       data: [
-        { categoryId: 'starter', value: 80 },
-        { categoryId: 'pro', value: 200 },
-        { categoryId: 'enterprise', value: 350 },
+        { categoryId: 'North America', value: 250 },
+        { categoryId: 'Europe', value: 200 },
+        { categoryId: 'Asia', value: 300 },
+        { categoryId: 'Other', value: 50 },
       ],
     },
     {
-      id: 'support',
-      label: 'Support',
+      id: 'standard',
+      label: 'Standard',
       data: [
-        { categoryId: 'starter', value: 50 },
-        { categoryId: 'pro', value: 100 },
-        { categoryId: 'enterprise', value: 80 },
+        { categoryId: 'North America', value: 200 },
+        { categoryId: 'Europe', value: 120 },
+        { categoryId: 'Asia', value: 250 },
+        { categoryId: 'Other', value: 80 },
       ],
     },
     {
-      id: 'services',
-      label: 'Services',
+      id: 'budget',
+      label: 'Budget',
       data: [
-        { categoryId: 'starter', value: 70 },
-        { categoryId: 'pro', value: 50 },
-        { categoryId: 'enterprise', value: 20 },
+        { categoryId: 'North America', value: 50 },
+        { categoryId: 'Europe', value: 30 },
+        { categoryId: 'Asia', value: 50 },
+        { categoryId: 'Other', value: 20 },
       ],
     },
-  ],
-};
-
-// --- sankey shape: nodes and directed links with flow values --------------------
-export const sankeySampleData = {
-  nodes: [
-    { id: 'browser', label: 'Browser' },
-    { id: 'device', label: 'Device' },
-    { id: 'os', label: 'OS' },
-    { id: 'chrome', label: 'Chrome' },
-    { id: 'safari', label: 'Safari' },
-    { id: 'firefox', label: 'Firefox' },
-    { id: 'windows', label: 'Windows' },
-    { id: 'macos', label: 'macOS' },
-    { id: 'linux', label: 'Linux' },
-  ],
-  links: [
-    { source: 'browser', target: 'chrome', value: 500 },
-    { source: 'browser', target: 'safari', value: 350 },
-    { source: 'browser', target: 'firefox', value: 200 },
-    { source: 'chrome', target: 'windows', value: 300 },
-    { source: 'chrome', target: 'macos', value: 150 },
-    { source: 'chrome', target: 'linux', value: 50 },
-    { source: 'safari', target: 'macos', value: 300 },
-    { source: 'safari', target: 'windows', value: 50 },
-    { source: 'firefox', target: 'windows', value: 120 },
-    { source: 'firefox', target: 'linux', value: 80 },
-  ],
-};
-
-export const sankeySupplyData = {
-  nodes: [
-    { id: 'supplier1', label: 'Supplier A' },
-    { id: 'supplier2', label: 'Supplier B' },
-    { id: 'warehouse', label: 'Warehouse' },
-    { id: 'retail', label: 'Retail' },
-    { id: 'online', label: 'Online' },
-    { id: 'customer', label: 'Customer' },
-  ],
-  links: [
-    { source: 'supplier1', target: 'warehouse', value: 600 },
-    { source: 'supplier2', target: 'warehouse', value: 400 },
-    { source: 'warehouse', target: 'retail', value: 500 },
-    { source: 'warehouse', target: 'online', value: 500 },
-    { source: 'retail', target: 'customer', value: 500 },
-    { source: 'online', target: 'customer', value: 500 },
   ],
 };
 
