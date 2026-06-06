@@ -1,5 +1,6 @@
 import './styles.css';
 import './styles-rtl.css';
+import { useState, useEffect, useRef } from 'react';
 import { useHashRoute } from './useHashRoute';
 import { Gallery } from './Gallery';
 import { Examples } from './Examples';
@@ -15,35 +16,73 @@ export default function App() {
   const { t } = useTranslation();
   useRTL();
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLElement>(null);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        closeMenu();
+      }
+    };
+    if (isMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [isMenuOpen]);
+
   return (
     <div className="app">
-      <header className="header">
+      <header className="header" ref={menuRef} data-menu-open={isMenuOpen}>
         <div className="brand">
           <h1>react-d3-viz</h1>
           <span className="tagline">{t('tagline')}</span>
         </div>
+        <button
+          className="hamburger"
+          onClick={toggleMenu}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMenuOpen}
+        >
+          ☰
+        </button>
         <nav className="nav">
           <button
             className={route.view === 'gallery' ? 'nav-active' : ''}
-            onClick={() => navigate({ view: 'gallery' })}
+            onClick={() => {
+              navigate({ view: 'gallery' });
+              closeMenu();
+            }}
           >
             {t('nav.gallery')}
           </button>
           <button
             className={route.view === 'examples' ? 'nav-active' : ''}
-            onClick={() => navigate({ view: 'examples' })}
+            onClick={() => {
+              navigate({ view: 'examples' });
+              closeMenu();
+            }}
           >
             {t('nav.examples')}
           </button>
           <button
             className={route.view === 'docs' ? 'nav-active' : ''}
-            onClick={() => navigate({ view: 'docs' })}
+            onClick={() => {
+              navigate({ view: 'docs' });
+              closeMenu();
+            }}
           >
             {t('nav.docs')}
           </button>
           <button
             className={route.view === 'playground' ? 'nav-active' : ''}
-            onClick={() => navigate({ view: 'playground', chartId: charts[0].id })}
+            onClick={() => {
+              navigate({ view: 'playground', chartId: charts[0].id });
+              closeMenu();
+            }}
           >
             {t('nav.playground')}
           </button>
