@@ -206,6 +206,21 @@ const sunburstProps: PropDoc[] = [
   { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
 ];
 
+const quadrantProps: PropDoc[] = [
+  { name: 'data', type: 'Datum[]', default: '—', description: 'Array of records to plot. Required.' },
+  { name: 'x', type: 'string | (d) => number', default: '—', description: 'Numeric x-axis value (e.g., impact, productivity). Required.' },
+  { name: 'y', type: 'string | (d) => number', default: '—', description: 'Numeric y-axis value (e.g., effort, satisfaction). Required.' },
+  { name: 'label', type: 'string | (d) => string', default: '—', description: 'Point label (name, project, etc.).' },
+  { name: 'size', type: 'string | (d) => number', default: '—', description: 'Optional accessor for bubble size (third dimension).' },
+  { name: 'xThreshold', type: 'number', default: '50', description: 'X-axis position of the vertical dividing line.' },
+  { name: 'yThreshold', type: 'number', default: '50', description: 'Y-axis position of the horizontal dividing line.' },
+  { name: 'quadrantLabels', type: '{ topLeft, topRight, bottomLeft, bottomRight }', default: '—', description: 'Labels for each quadrant (shown on axes).' },
+  { name: 'height', type: 'number', default: '300', description: 'Pixel height of the chart.' },
+  { name: 'showLegend', type: 'boolean', default: 'true', description: 'Show the interactive legend.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Enable enter animation.' },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
+];
+
 /** Prop reference keyed by chart id (matches registry ids). */
 export const propDocs: Record<string, PropDoc[]> = {
   line: [...cartesianProps, ...lineExtra],
@@ -223,4 +238,5 @@ export const propDocs: Record<string, PropDoc[]> = {
   butterfly: butterflyProps,
   heatmap: heatmapProps,
   sunburst: sunburstProps,
+  quadrant: quadrantProps,
 };

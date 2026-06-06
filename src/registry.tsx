@@ -15,6 +15,7 @@ import {
   ButterflyChart,
   HeatmapChart,
   SunburstChart,
+  QuadrantChart,
 } from 'react-d3-viz';
 import {
   months,
@@ -44,6 +45,8 @@ import {
   heatmapUtilization,
   sunburstOrg,
   sunburstFiles,
+  quadrantProjects,
+  quadrantEmployees,
 } from './data';
 import type { Control } from './controls';
 
@@ -609,6 +612,38 @@ const sunburstDatasets: Dataset[] = [
   },
 ];
 
+// --- quadrant datasets -------------------------------------------------------
+const quadrantProjectsCode = `const data = [
+  { name: 'Refactor auth', impact: 8, effort: 6, size: 1200 },
+  { name: 'Add dark mode', impact: 5, effort: 2, size: 800 },
+  // …6 more projects
+];`;
+
+const quadrantEmployeesCode = `const data = [
+  { name: 'Alice', productivity: 85, satisfaction: 92, tenure: 3 },
+  { name: 'Bob', productivity: 72, satisfaction: 65, tenure: 5 },
+  // …4 more employees
+];`;
+
+const quadrantDatasets: Dataset[] = [
+  {
+    key: 'projects',
+    name: 'Impact-effort matrix',
+    props: { data: quadrantProjects, x: 'impact', y: 'effort', size: 'size', label: 'name', xThreshold: 6, yThreshold: 6 },
+    dataCode: quadrantProjectsCode,
+    dataAttr: 'data={data}',
+    accessors: { x: 'impact', y: 'effort', size: 'size', label: 'name' },
+  },
+  {
+    key: 'employees',
+    name: 'Performance grid',
+    props: { data: quadrantEmployees, x: 'productivity', y: 'satisfaction', size: 'tenure', label: 'name', xThreshold: 75, yThreshold: 80 },
+    dataCode: quadrantEmployeesCode,
+    dataAttr: 'data={data}',
+    accessors: { x: 'productivity', y: 'satisfaction', size: 'tenure', label: 'name' },
+  },
+];
+
 export const charts: ChartDef[] = [
   {
     id: 'line',
@@ -907,6 +942,27 @@ export const charts: ChartDef[] = [
       { title: 'Organization', description: 'Company hierarchy: departments and teams.', datasetKey: 'org', props: {} },
       { title: 'File sizes', description: 'Project structure with file sizes.', datasetKey: 'files', props: {} },
       { title: 'Legend only', description: 'Hide labels for a clean visual.', datasetKey: 'org', props: { showLabels: false } },
+    ],
+  },
+  {
+    id: 'quadrant',
+    title: 'Quadrant',
+    blurb: 'Scatter plot divided into four quadrants by reference lines — great for prioritization matrices.',
+    componentName: 'QuadrantChart',
+    Component: QuadrantChart,
+    datasets: quadrantDatasets,
+    defaultProps: { height: 360, animate: true, showLegend: true },
+    controls: [
+      heightCtrl,
+      { key: 'xThreshold', label: 'xThreshold', type: 'number', min: 0, max: 100, step: 5 },
+      { key: 'yThreshold', label: 'yThreshold', type: 'number', min: 0, max: 100, step: 5 },
+      animateCtrl,
+      legendCtrl,
+    ],
+    examples: [
+      { title: 'Impact-effort matrix', description: 'Project prioritization: high impact + low effort = quick wins (top-left).', datasetKey: 'projects', props: {} },
+      { title: 'Performance grid', description: 'Employee satisfaction vs productivity.', datasetKey: 'employees', props: {} },
+      { title: 'Custom thresholds', description: 'Adjust dividing lines to 5/5 for different quadrant split.', datasetKey: 'projects', props: { xThreshold: 5, yThreshold: 5 } },
     ],
   },
 ];

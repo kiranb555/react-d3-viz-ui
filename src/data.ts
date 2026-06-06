@@ -386,3 +386,24 @@ export const sunburstFiles = {
     { name: 'docs', value: 800 },
   ],
 };
+
+// --- quadrant shape: x, y, and optional size --------------------------------
+export const quadrantProjects = [
+  { name: 'Refactor auth', impact: 8, effort: 6, size: 1200 },
+  { name: 'Add dark mode', impact: 5, effort: 2, size: 800 },
+  { name: 'New payment', impact: 9, effort: 8, size: 2000 },
+  { name: 'Fix bugs', impact: 4, effort: 3, size: 500 },
+  { name: 'API v2', impact: 7, effort: 9, size: 1800 },
+  { name: 'Analytics', impact: 6, effort: 4, size: 1000 },
+  { name: 'Mobile app', impact: 9, effort: 10, size: 2500 },
+  { name: 'Docs update', impact: 3, effort: 2, size: 300 },
+];
+
+export const quadrantEmployees = [
+  { name: 'Alice', productivity: 85, satisfaction: 92, tenure: 3 },
+  { name: 'Bob', productivity: 72, satisfaction: 65, tenure: 5 },
+  { name: 'Carol', productivity: 88, satisfaction: 78, tenure: 2 },
+  { name: 'Diana', productivity: 78, satisfaction: 88, tenure: 4 },
+  { name: 'Eve', productivity: 92, satisfaction: 70, tenure: 1 },
+  { name: 'Frank', productivity: 65, satisfaction: 75, tenure: 6 },
+];
