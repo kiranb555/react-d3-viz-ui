@@ -26,6 +26,18 @@ import registryKn from './locales/kn/registry.json';
 import docsKn from './locales/kn/docs.json';
 import propDocsKn from './locales/kn/propDocs.json';
 
+// German translations
+import commonDe from './locales/de/common.json';
+import registryDe from './locales/de/registry.json';
+import docsDe from './locales/de/docs.json';
+import propDocsDe from './locales/de/propDocs.json';
+
+// Hindi translations
+import commonHi from './locales/hi/common.json';
+import registryHi from './locales/hi/registry.json';
+import docsHi from './locales/hi/docs.json';
+import propDocsHi from './locales/hi/propDocs.json';
+
 const resources = {
   en: {
     common: commonEn,
@@ -50,6 +62,18 @@ const resources = {
     registry: registryKn,
     docs: docsKn,
     propDocs: propDocsKn,
+  },
+  de: {
+    common: commonDe,
+    registry: registryDe,
+    docs: docsDe,
+    propDocs: propDocsDe,
+  },
+  hi: {
+    common: commonHi,
+    registry: registryHi,
+    docs: docsHi,
+    propDocs: propDocsHi,
   },
 };
 
