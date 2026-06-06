@@ -1,52 +1,59 @@
 import './styles.css';
+import './styles-rtl.css';
 import { useHashRoute } from './useHashRoute';
 import { Gallery } from './Gallery';
 import { Examples } from './Examples';
 import { Docs } from './Docs';
 import { Playground } from './Playground';
 import { charts } from './registry';
+import { useTranslation } from 'react-i18next';
+import { useRTL } from './useRTL';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export default function App() {
   const [route, navigate] = useHashRoute();
+  const { t } = useTranslation();
+  useRTL();
 
   return (
     <div className="app">
       <header className="header">
         <div className="brand">
           <h1>react-d3-viz</h1>
-          <span className="tagline">Cross-platform SVG charts for React &amp; React Native</span>
+          <span className="tagline">{t('tagline')}</span>
         </div>
         <nav className="nav">
           <button
             className={route.view === 'gallery' ? 'nav-active' : ''}
             onClick={() => navigate({ view: 'gallery' })}
           >
-            Gallery
+            {t('nav.gallery')}
           </button>
           <button
             className={route.view === 'examples' ? 'nav-active' : ''}
             onClick={() => navigate({ view: 'examples' })}
           >
-            Examples
+            {t('nav.examples')}
           </button>
           <button
             className={route.view === 'docs' ? 'nav-active' : ''}
             onClick={() => navigate({ view: 'docs' })}
           >
-            Docs
+            {t('nav.docs')}
           </button>
           <button
             className={route.view === 'playground' ? 'nav-active' : ''}
             onClick={() => navigate({ view: 'playground', chartId: charts[0].id })}
           >
-            Playground
+            {t('nav.playground')}
           </button>
           <a className="nav-ext" href="https://www.npmjs.com/package/react-d3-viz" target="_blank" rel="noreferrer">
-            npm ↗
+            {t('nav.npm')}
           </a>
           <a className="nav-ext" href="https://github.com/kiranb555/react-d3-viz" target="_blank" rel="noreferrer">
-            GitHub ↗
+            {t('nav.github')}
           </a>
+          <LanguageSwitcher />
         </nav>
       </header>
 
@@ -66,7 +73,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        Built with <code>react-d3-viz</code> · install via <code>npm i react-d3-viz</code>
+        <div dangerouslySetInnerHTML={{ __html: t('footer.text') }} />
       </footer>
     </div>
   );
