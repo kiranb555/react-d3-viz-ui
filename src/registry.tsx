@@ -12,6 +12,10 @@ import {
   WaterfallChart,
   SankeyDiagram,
   MekkoChart,
+  ButterflyChart,
+  HeatmapChart,
+  SunburstChart,
+  QuadrantChart,
 } from 'react-d3-viz';
 import {
   months,
@@ -35,6 +39,14 @@ import {
   sankeyComplex,
   mekkoBasic,
   mekkoMarket,
+  butterflyPopulation,
+  butterflyDepartment,
+  heatmapSales,
+  heatmapUtilization,
+  sunburstOrg,
+  sunburstFiles,
+  quadrantProjects,
+  quadrantEmployees,
 } from './data';
 import type { Control } from './controls';
 
@@ -487,6 +499,151 @@ const mekkoDatasets: Dataset[] = [
   },
 ];
 
+// --- butterfly datasets ----------------------------------------------------------
+const butterflyPopulationCode = `const data = [
+  { ageGroup: '0-10', male: 45, female: 42 },
+  { ageGroup: '10-20', male: 52, female: 50 },
+  // …7 more age groups
+];`;
+
+const butterflyDepartmentCode = `const data = [
+  { department: 'Engineering', male: 28, female: 12 },
+  { department: 'Product', male: 8, female: 10 },
+  // …4 more departments
+];`;
+
+const butterflyDatasets: Dataset[] = [
+  {
+    key: 'population',
+    name: 'Population pyramid',
+    props: { data: butterflyPopulation, category: 'ageGroup', left: 'male', right: 'female' },
+    dataCode: butterflyPopulationCode,
+    dataAttr: 'data={data}',
+    accessors: { category: 'ageGroup', left: 'male', right: 'female' },
+  },
+  {
+    key: 'department',
+    name: 'Department gender',
+    props: { data: butterflyDepartment, category: 'department', left: 'male', right: 'female' },
+    dataCode: butterflyDepartmentCode,
+    dataAttr: 'data={data}',
+    accessors: { category: 'department', left: 'male', right: 'female' },
+  },
+];
+
+// --- heatmap datasets --------------------------------------------------------
+const heatmapSalesCode = `const data = [
+  { product: 'Laptop', 'North America': 450, 'Europe': 320, … },
+  { product: 'Phone', 'North America': 520, 'Europe': 480, … },
+  // …3 more products
+];`;
+
+const heatmapUtilizationCode = `const data = [
+  { team: 'Team A', Mon: 85, Tue: 92, Wed: 78, … },
+  { team: 'Team B', Mon: 70, Tue: 75, Wed: 82, … },
+  // …2 more teams
+];`;
+
+const heatmapDatasets: Dataset[] = [
+  {
+    key: 'sales',
+    name: 'Regional sales',
+    props: { data: heatmapSales, x: 'product', y: (d: Record<string, unknown>) => Object.keys(d).filter(k => k !== 'product') as string[], value: (d: Record<string, unknown>, region: string) => d[region] },
+    dataCode: heatmapSalesCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+  {
+    key: 'utilization',
+    name: 'Team utilization',
+    props: { data: heatmapUtilization, x: 'team', y: (d: Record<string, unknown>) => Object.keys(d).filter(k => k !== 'team') as string[], value: (d: Record<string, unknown>, day: string) => d[day] },
+    dataCode: heatmapUtilizationCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+];
+
+// --- sunburst datasets -------------------------------------------------------
+const sunburstOrgCode = `const data = {
+  name: 'Company',
+  children: [
+    {
+      name: 'Engineering',
+      children: [
+        { name: 'Frontend', value: 8 },
+        { name: 'Backend', value: 6 },
+        // …more teams
+      ],
+    },
+    // …more departments
+  ],
+};`;
+
+const sunburstFilesCode = `const data = {
+  name: 'project',
+  children: [
+    {
+      name: 'src',
+      children: [
+        { name: 'components', value: 2500 },
+        // …more
+      ],
+    },
+    // …more folders
+  ],
+};`;
+
+const sunburstDatasets: Dataset[] = [
+  {
+    key: 'org',
+    name: 'Organization',
+    props: { data: sunburstOrg },
+    dataCode: sunburstOrgCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+  {
+    key: 'files',
+    name: 'File sizes',
+    props: { data: sunburstFiles },
+    dataCode: sunburstFilesCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+];
+
+// --- quadrant datasets -------------------------------------------------------
+const quadrantProjectsCode = `const data = [
+  { name: 'Refactor auth', impact: 8, effort: 6, size: 1200 },
+  { name: 'Add dark mode', impact: 5, effort: 2, size: 800 },
+  // …6 more projects
+];`;
+
+const quadrantEmployeesCode = `const data = [
+  { name: 'Alice', productivity: 85, satisfaction: 92, tenure: 3 },
+  { name: 'Bob', productivity: 72, satisfaction: 65, tenure: 5 },
+  // …4 more employees
+];`;
+
+const quadrantDatasets: Dataset[] = [
+  {
+    key: 'projects',
+    name: 'Impact-effort matrix',
+    props: { data: quadrantProjects, x: 'impact', y: 'effort', size: 'size', label: 'name', xThreshold: 6, yThreshold: 6 },
+    dataCode: quadrantProjectsCode,
+    dataAttr: 'data={data}',
+    accessors: { x: 'impact', y: 'effort', size: 'size', label: 'name' },
+  },
+  {
+    key: 'employees',
+    name: 'Performance grid',
+    props: { data: quadrantEmployees, x: 'productivity', y: 'satisfaction', size: 'tenure', label: 'name', xThreshold: 75, yThreshold: 80 },
+    dataCode: quadrantEmployeesCode,
+    dataAttr: 'data={data}',
+    accessors: { x: 'productivity', y: 'satisfaction', size: 'tenure', label: 'name' },
+  },
+];
+
 export const charts: ChartDef[] = [
   {
     id: 'line',
@@ -725,6 +882,87 @@ export const charts: ChartDef[] = [
       { title: 'Quarterly products', description: 'Product mix across quarters.', datasetKey: 'quarterly', props: {} },
       { title: 'Market segments', description: 'Revenue by region and tier.', datasetKey: 'market', props: {} },
       { title: 'Custom formatters', description: 'Format categories and values.', datasetKey: 'quarterly', props: { categoryLabelFormatter: (l: string) => `Q${l}`, valueFormatter: (v: number) => `${v}M` } },
+    ],
+  },
+  {
+    id: 'butterfly',
+    title: 'Butterfly',
+    blurb: 'Back-to-back bar chart, ideal for comparing two opposing series across categories.',
+    componentName: 'ButterflyChart',
+    Component: ButterflyChart,
+    datasets: butterflyDatasets,
+    defaultProps: { height: 320, animate: true, showLegend: true },
+    controls: [
+      heightCtrl,
+      animateCtrl,
+      legendCtrl,
+    ],
+    examples: [
+      { title: 'Age pyramid', description: 'Population distribution by age and gender.', datasetKey: 'population', props: {} },
+      { title: 'Department gender', description: 'Staffing breakdown by department.', datasetKey: 'department', props: {} },
+      { title: 'Custom left/right labels', description: 'Override default Male/Female labels.', datasetKey: 'population', props: { leftLabel: 'Men', rightLabel: 'Women' } },
+    ],
+  },
+  {
+    id: 'heatmap',
+    title: 'Heatmap',
+    blurb: 'Color-coded grid showing relationships across two dimensions.',
+    componentName: 'HeatmapChart',
+    Component: HeatmapChart,
+    datasets: heatmapDatasets,
+    defaultProps: { height: 320, cellPadding: 2, animate: true, showLegend: true },
+    controls: [
+      heightCtrl,
+      { key: 'cellPadding', label: 'cellPadding', type: 'number', min: 0, max: 8, step: 1 },
+      animateCtrl,
+      legendCtrl,
+    ],
+    examples: [
+      { title: 'Sales by region', description: 'Product revenue across North America, Europe, Asia, and LATAM.', datasetKey: 'sales', props: {} },
+      { title: 'Team utilization', description: 'Daily team utilization percentages (warm = busy).', datasetKey: 'utilization', props: {} },
+      { title: 'Dense cells', description: 'Minimal padding for a compact grid.', datasetKey: 'sales', props: { cellPadding: 0 } },
+    ],
+  },
+  {
+    id: 'sunburst',
+    title: 'Sunburst',
+    blurb: 'Hierarchical radial chart showing nested data as concentric rings.',
+    componentName: 'SunburstChart',
+    Component: SunburstChart,
+    datasets: sunburstDatasets,
+    defaultProps: { height: 400, innerRadius: 60, animate: true, showLabels: true, showLegend: true },
+    controls: [
+      heightCtrl,
+      { key: 'innerRadius', label: 'innerRadius', type: 'number', min: 0, max: 150, step: 10 },
+      { key: 'showLabels', label: 'showLabels', type: 'boolean' },
+      legendCtrl,
+      animateCtrl,
+    ],
+    examples: [
+      { title: 'Organization', description: 'Company hierarchy: departments and teams.', datasetKey: 'org', props: {} },
+      { title: 'File sizes', description: 'Project structure with file sizes.', datasetKey: 'files', props: {} },
+      { title: 'Legend only', description: 'Hide labels for a clean visual.', datasetKey: 'org', props: { showLabels: false } },
+    ],
+  },
+  {
+    id: 'quadrant',
+    title: 'Quadrant',
+    blurb: 'Scatter plot divided into four quadrants by reference lines — great for prioritization matrices.',
+    componentName: 'QuadrantChart',
+    Component: QuadrantChart,
+    datasets: quadrantDatasets,
+    defaultProps: { height: 360, animate: true, showLegend: true },
+    controls: [
+      heightCtrl,
+      { key: 'xThreshold', label: 'xThreshold', type: 'number', min: 0, max: 100, step: 5 },
+      { key: 'yThreshold', label: 'yThreshold', type: 'number', min: 0, max: 100, step: 5 },
+      animateCtrl,
+      legendCtrl,
+    ],
+    examples: [
+      { title: 'Impact-effort matrix', description: 'Project prioritization: high impact + low effort = quick wins (top-left).', datasetKey: 'projects', props: {} },
+      { title: 'Performance grid', description: 'Employee satisfaction vs productivity.', datasetKey: 'employees', props: {} },
+      { title: 'Custom thresholds', description: 'Adjust dividing lines to 5/5 for different quadrant split.', datasetKey: 'projects', props: { xThreshold: 5, yThreshold: 5 } },
     ],
   },
 ];

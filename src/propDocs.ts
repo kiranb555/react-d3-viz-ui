@@ -167,6 +167,60 @@ const mekkoProps: PropDoc[] = [
   { name: 'onSegmentHover', type: '(seriesId: string | null) => void', default: '—', description: 'Callback on segment hover.' },
 ];
 
+const butterflyProps: PropDoc[] = [
+  { name: 'data', type: 'Datum[]', default: '—', description: 'Array of records, one per category. Required.' },
+  { name: 'category', type: 'string | (d) => unknown', default: '—', description: 'Category accessor (age group, department, etc.). Required.' },
+  { name: 'left', type: 'string | (d) => number', default: '—', description: 'Left-side series numeric value (e.g., male count). Required.' },
+  { name: 'right', type: 'string | (d) => number', default: '—', description: 'Right-side series numeric value (e.g., female count). Required.' },
+  { name: 'leftLabel', type: 'string', default: 'Left', description: 'Label for the left series (shown in legend and axis).' },
+  { name: 'rightLabel', type: 'string', default: 'Right', description: 'Label for the right series (shown in legend and axis).' },
+  { name: 'height', type: 'number', default: '300', description: 'Pixel height of the chart.' },
+  { name: 'showLegend', type: 'boolean', default: 'true', description: 'Show the interactive legend.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Enable enter animation.' },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides (colors, fonts, etc.).' },
+];
+
+const heatmapProps: PropDoc[] = [
+  { name: 'data', type: 'Datum[]', default: '—', description: 'Array of records. Required.' },
+  { name: 'x', type: 'string | (d) => unknown', default: '—', description: 'Row category accessor (product, team, etc.). Required.' },
+  { name: 'y', type: 'string[] | (d) => string[]', default: '—', description: 'Column category accessor or array of column names. Required.' },
+  { name: 'value', type: '(d, col) => number', default: '—', description: 'Function extracting the numeric value for a cell. Required.' },
+  { name: 'cellPadding', type: 'number', default: '2', description: 'Pixel gap between cells.' },
+  { name: 'colorScale', type: 'string | (val) => string', default: 'sequential', description: 'Color scale (sequential, diverging, or custom function).' },
+  { name: 'height', type: 'number', default: '300', description: 'Pixel height of the chart.' },
+  { name: 'showLegend', type: 'boolean', default: 'true', description: 'Show the color scale legend.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Enable enter animation.' },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
+];
+
+const sunburstProps: PropDoc[] = [
+  { name: 'data', type: 'HierarchyNode', default: '—', description: 'Nested object with name, children, and optional value. Required.' },
+  { name: 'value', type: 'string | (d) => number', default: 'value', description: 'Accessor for leaf node size (outer ring cell area).' },
+  { name: 'label', type: 'string | (d) => string', default: 'name', description: 'Accessor for cell label text (shown in cells and tooltip).' },
+  { name: 'childrenKey', type: 'string', default: "'children'", description: 'Key containing nested children array.' },
+  { name: 'innerRadius', type: 'number', default: '0', description: 'Inner hole size in pixels. 0 = pie, >0 = sunburst rings.' },
+  { name: 'showLabels', type: 'boolean', default: 'true', description: 'Show text labels inside cells.' },
+  { name: 'showLegend', type: 'boolean', default: 'true', description: 'Show the interactive legend.' },
+  { name: 'height', type: 'number', default: '400', description: 'Pixel height of the chart.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Enable enter animation.' },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
+];
+
+const quadrantProps: PropDoc[] = [
+  { name: 'data', type: 'Datum[]', default: '—', description: 'Array of records to plot. Required.' },
+  { name: 'x', type: 'string | (d) => number', default: '—', description: 'Numeric x-axis value (e.g., impact, productivity). Required.' },
+  { name: 'y', type: 'string | (d) => number', default: '—', description: 'Numeric y-axis value (e.g., effort, satisfaction). Required.' },
+  { name: 'label', type: 'string | (d) => string', default: '—', description: 'Point label (name, project, etc.).' },
+  { name: 'size', type: 'string | (d) => number', default: '—', description: 'Optional accessor for bubble size (third dimension).' },
+  { name: 'xThreshold', type: 'number', default: '50', description: 'X-axis position of the vertical dividing line.' },
+  { name: 'yThreshold', type: 'number', default: '50', description: 'Y-axis position of the horizontal dividing line.' },
+  { name: 'quadrantLabels', type: '{ topLeft, topRight, bottomLeft, bottomRight }', default: '—', description: 'Labels for each quadrant (shown on axes).' },
+  { name: 'height', type: 'number', default: '300', description: 'Pixel height of the chart.' },
+  { name: 'showLegend', type: 'boolean', default: 'true', description: 'Show the interactive legend.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Enable enter animation.' },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
+];
+
 /** Prop reference keyed by chart id (matches registry ids). */
 export const propDocs: Record<string, PropDoc[]> = {
   line: [...cartesianProps, ...lineExtra],
@@ -181,4 +235,8 @@ export const propDocs: Record<string, PropDoc[]> = {
   waterfall: waterfallProps,
   sankey: sankeyProps,
   mekko: mekkoProps,
+  butterfly: butterflyProps,
+  heatmap: heatmapProps,
+  sunburst: sunburstProps,
+  quadrant: quadrantProps,
 };

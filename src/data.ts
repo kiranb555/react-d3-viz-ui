@@ -295,3 +295,115 @@ export const palettes: { name: string; colors: string[] }[] = [
   { name: 'Forest', colors: ['#16a34a', '#65a30d', '#0d9488', '#0891b2', '#4d7c0f', '#15803d'] },
   { name: 'Mono', colors: ['#0f172a', '#334155', '#64748b', '#94a3b8', '#cbd5e1', '#475569'] },
 ];
+
+// --- butterfly shape: category + two numeric series (male/female or left/right) -
+export const butterflyPopulation = [
+  { ageGroup: '0-10', male: 45, female: 42 },
+  { ageGroup: '10-20', male: 52, female: 50 },
+  { ageGroup: '20-30', male: 58, female: 61 },
+  { ageGroup: '30-40', male: 55, female: 57 },
+  { ageGroup: '40-50', male: 48, female: 50 },
+  { ageGroup: '50-60', male: 40, female: 42 },
+  { ageGroup: '60-70', male: 28, female: 32 },
+  { ageGroup: '70-80', male: 15, female: 18 },
+  { ageGroup: '80+', male: 8, female: 12 },
+];
+
+export const butterflyDepartment = [
+  { department: 'Engineering', male: 28, female: 12 },
+  { department: 'Product', male: 8, female: 10 },
+  { department: 'Design', male: 6, female: 9 },
+  { department: 'Sales', male: 15, female: 18 },
+  { department: 'Marketing', male: 5, female: 8 },
+  { department: 'HR', male: 3, female: 7 },
+];
+
+// --- heatmap shape: rows x columns with numeric values -------------------------
+export const heatmapSales = [
+  { product: 'Laptop', 'North America': 450, 'Europe': 320, 'Asia': 280, 'LATAM': 180 },
+  { product: 'Phone', 'North America': 520, 'Europe': 480, 'Asia': 650, 'LATAM': 220 },
+  { product: 'Tablet', 'North America': 280, 'Europe': 290, 'Asia': 410, 'LATAM': 150 },
+  { product: 'Wearable', 'North America': 180, 'Europe': 200, 'Asia': 350, 'LATAM': 100 },
+  { product: 'Software', 'North America': 720, 'Europe': 680, 'Asia': 450, 'LATAM': 300 },
+];
+
+export const heatmapUtilization = [
+  { team: 'Team A', Mon: 85, Tue: 92, Wed: 78, Thu: 88, Fri: 95 },
+  { team: 'Team B', Mon: 70, Tue: 75, Wed: 82, Thu: 80, Fri: 73 },
+  { team: 'Team C', Mon: 92, Tue: 88, Wed: 95, Thu: 90, Fri: 85 },
+  { team: 'Team D', Mon: 60, Tue: 65, Wed: 68, Thu: 72, Fri: 75 },
+];
+
+// --- sunburst shape: hierarchical data with nested children --------
+export const sunburstOrg = {
+  name: 'Company',
+  children: [
+    {
+      name: 'Engineering',
+      children: [
+        { name: 'Frontend', value: 8 },
+        { name: 'Backend', value: 6 },
+        { name: 'DevOps', value: 3 },
+      ],
+    },
+    {
+      name: 'Sales',
+      children: [
+        { name: 'Enterprise', value: 5 },
+        { name: 'SMB', value: 4 },
+      ],
+    },
+    {
+      name: 'Operations',
+      children: [
+        { name: 'HR', value: 4 },
+        { name: 'Finance', value: 3 },
+        { name: 'Legal', value: 2 },
+      ],
+    },
+  ],
+};
+
+export const sunburstFiles = {
+  name: 'project',
+  children: [
+    {
+      name: 'src',
+      children: [
+        { name: 'components', value: 2500 },
+        { name: 'utils', value: 1200 },
+        { name: 'hooks', value: 800 },
+      ],
+    },
+    {
+      name: 'tests',
+      children: [
+        { name: 'unit', value: 3000 },
+        { name: 'integration', value: 2000 },
+      ],
+    },
+    { name: 'dist', value: 5000 },
+    { name: 'docs', value: 800 },
+  ],
+};
+
+// --- quadrant shape: x, y, and optional size --------------------------------
+export const quadrantProjects = [
+  { name: 'Refactor auth', impact: 8, effort: 6, size: 1200 },
+  { name: 'Add dark mode', impact: 5, effort: 2, size: 800 },
+  { name: 'New payment', impact: 9, effort: 8, size: 2000 },
+  { name: 'Fix bugs', impact: 4, effort: 3, size: 500 },
+  { name: 'API v2', impact: 7, effort: 9, size: 1800 },
+  { name: 'Analytics', impact: 6, effort: 4, size: 1000 },
+  { name: 'Mobile app', impact: 9, effort: 10, size: 2500 },
+  { name: 'Docs update', impact: 3, effort: 2, size: 300 },
+];
+
+export const quadrantEmployees = [
+  { name: 'Alice', productivity: 85, satisfaction: 92, tenure: 3 },
+  { name: 'Bob', productivity: 72, satisfaction: 65, tenure: 5 },
+  { name: 'Carol', productivity: 88, satisfaction: 78, tenure: 2 },
+  { name: 'Diana', productivity: 78, satisfaction: 88, tenure: 4 },
+  { name: 'Eve', productivity: 92, satisfaction: 70, tenure: 1 },
+  { name: 'Frank', productivity: 65, satisfaction: 75, tenure: 6 },
+];
