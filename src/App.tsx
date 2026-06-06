@@ -135,7 +135,10 @@ export default function App() {
       <footer className="footer">
         <div dangerouslySetInnerHTML={{ __html: t('footer.text') }} />
         <div className="footer-heart">
-          Built with <HeartIcon className="heart-icon" /> by <a href="https://www.kirandev.in" target="_blank" rel="noreferrer" className="footer-link">Kiran</a>
+          Built with <HeartIcon className="heart-icon" />
+        </div>
+        <div className="footer-contributor">
+          <a href="https://www.kirandev.in" target="_blank" rel="noreferrer" className="footer-link">www.kirandev.in</a>
         </div>
       </footer>
     </div>

@@ -231,6 +231,7 @@ body { margin: 0; background: var(--bg); }
 [data-theme="dark"] .footer code { background: #23273a; }
 .footer-heart { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; font-size: 13px; color: var(--muted); }
 .heart-icon { width: 16px; height: 16px; color: #ef4444; fill: #ef4444; }
+.footer-contributor { margin-top: 8px; font-size: 12px; }
 .footer-link { color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s ease; }
 .footer-link:hover { text-decoration: underline; color: var(--text); }
 
