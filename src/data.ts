@@ -295,3 +295,25 @@ export const palettes: { name: string; colors: string[] }[] = [
   { name: 'Forest', colors: ['#16a34a', '#65a30d', '#0d9488', '#0891b2', '#4d7c0f', '#15803d'] },
   { name: 'Mono', colors: ['#0f172a', '#334155', '#64748b', '#94a3b8', '#cbd5e1', '#475569'] },
 ];
+
+// --- butterfly shape: category + two numeric series (male/female or left/right) -
+export const butterflyPopulation = [
+  { ageGroup: '0-10', male: 45, female: 42 },
+  { ageGroup: '10-20', male: 52, female: 50 },
+  { ageGroup: '20-30', male: 58, female: 61 },
+  { ageGroup: '30-40', male: 55, female: 57 },
+  { ageGroup: '40-50', male: 48, female: 50 },
+  { ageGroup: '50-60', male: 40, female: 42 },
+  { ageGroup: '60-70', male: 28, female: 32 },
+  { ageGroup: '70-80', male: 15, female: 18 },
+  { ageGroup: '80+', male: 8, female: 12 },
+];
+
+export const butterflyDepartment = [
+  { department: 'Engineering', male: 28, female: 12 },
+  { department: 'Product', male: 8, female: 10 },
+  { department: 'Design', male: 6, female: 9 },
+  { department: 'Sales', male: 15, female: 18 },
+  { department: 'Marketing', male: 5, female: 8 },
+  { department: 'HR', male: 3, female: 7 },
+];

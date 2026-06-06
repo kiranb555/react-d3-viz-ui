@@ -167,6 +167,19 @@ const mekkoProps: PropDoc[] = [
   { name: 'onSegmentHover', type: '(seriesId: string | null) => void', default: '—', description: 'Callback on segment hover.' },
 ];
 
+const butterflyProps: PropDoc[] = [
+  { name: 'data', type: 'Datum[]', default: '—', description: 'Array of records, one per category. Required.' },
+  { name: 'category', type: 'string | (d) => unknown', default: '—', description: 'Category accessor (age group, department, etc.). Required.' },
+  { name: 'left', type: 'string | (d) => number', default: '—', description: 'Left-side series numeric value (e.g., male count). Required.' },
+  { name: 'right', type: 'string | (d) => number', default: '—', description: 'Right-side series numeric value (e.g., female count). Required.' },
+  { name: 'leftLabel', type: 'string', default: 'Left', description: 'Label for the left series (shown in legend and axis).' },
+  { name: 'rightLabel', type: 'string', default: 'Right', description: 'Label for the right series (shown in legend and axis).' },
+  { name: 'height', type: 'number', default: '300', description: 'Pixel height of the chart.' },
+  { name: 'showLegend', type: 'boolean', default: 'true', description: 'Show the interactive legend.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Enable enter animation.' },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides (colors, fonts, etc.).' },
+];
+
 /** Prop reference keyed by chart id (matches registry ids). */
 export const propDocs: Record<string, PropDoc[]> = {
   line: [...cartesianProps, ...lineExtra],
@@ -181,4 +194,5 @@ export const propDocs: Record<string, PropDoc[]> = {
   waterfall: waterfallProps,
   sankey: sankeyProps,
   mekko: mekkoProps,
+  butterfly: butterflyProps,
 };

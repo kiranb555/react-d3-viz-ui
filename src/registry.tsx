@@ -12,6 +12,7 @@ import {
   WaterfallChart,
   SankeyDiagram,
   MekkoChart,
+  ButterflyChart,
 } from 'react-d3-viz';
 import {
   months,
@@ -35,6 +36,8 @@ import {
   sankeyComplex,
   mekkoBasic,
   mekkoMarket,
+  butterflyPopulation,
+  butterflyDepartment,
 } from './data';
 import type { Control } from './controls';
 
@@ -487,6 +490,38 @@ const mekkoDatasets: Dataset[] = [
   },
 ];
 
+// --- butterfly datasets ----------------------------------------------------------
+const butterflyPopulationCode = `const data = [
+  { ageGroup: '0-10', male: 45, female: 42 },
+  { ageGroup: '10-20', male: 52, female: 50 },
+  // …7 more age groups
+];`;
+
+const butterflyDepartmentCode = `const data = [
+  { department: 'Engineering', male: 28, female: 12 },
+  { department: 'Product', male: 8, female: 10 },
+  // …4 more departments
+];`;
+
+const butterflyDatasets: Dataset[] = [
+  {
+    key: 'population',
+    name: 'Population pyramid',
+    props: { data: butterflyPopulation, category: 'ageGroup', left: 'male', right: 'female' },
+    dataCode: butterflyPopulationCode,
+    dataAttr: 'data={data}',
+    accessors: { category: 'ageGroup', left: 'male', right: 'female' },
+  },
+  {
+    key: 'department',
+    name: 'Department gender',
+    props: { data: butterflyDepartment, category: 'department', left: 'male', right: 'female' },
+    dataCode: butterflyDepartmentCode,
+    dataAttr: 'data={data}',
+    accessors: { category: 'department', left: 'male', right: 'female' },
+  },
+];
+
 export const charts: ChartDef[] = [
   {
     id: 'line',
@@ -725,6 +760,25 @@ export const charts: ChartDef[] = [
       { title: 'Quarterly products', description: 'Product mix across quarters.', datasetKey: 'quarterly', props: {} },
       { title: 'Market segments', description: 'Revenue by region and tier.', datasetKey: 'market', props: {} },
       { title: 'Custom formatters', description: 'Format categories and values.', datasetKey: 'quarterly', props: { categoryLabelFormatter: (l: string) => `Q${l}`, valueFormatter: (v: number) => `${v}M` } },
+    ],
+  },
+  {
+    id: 'butterfly',
+    title: 'Butterfly',
+    blurb: 'Back-to-back bar chart, ideal for comparing two opposing series across categories.',
+    componentName: 'ButterflyChart',
+    Component: ButterflyChart,
+    datasets: butterflyDatasets,
+    defaultProps: { height: 320, animate: true, showLegend: true },
+    controls: [
+      heightCtrl,
+      animateCtrl,
+      legendCtrl,
+    ],
+    examples: [
+      { title: 'Age pyramid', description: 'Population distribution by age and gender.', datasetKey: 'population', props: {} },
+      { title: 'Department gender', description: 'Staffing breakdown by department.', datasetKey: 'department', props: {} },
+      { title: 'Custom left/right labels', description: 'Override default Male/Female labels.', datasetKey: 'population', props: { leftLabel: 'Men', rightLabel: 'Women' } },
     ],
   },
 ];
