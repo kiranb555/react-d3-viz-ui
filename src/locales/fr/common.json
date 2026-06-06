@@ -1,0 +1,17 @@
+{
+  "nav.gallery": "Galerie",
+  "nav.examples": "Exemples",
+  "nav.docs": "Documentation",
+  "nav.playground": "Playground",
+  "nav.npm": "npm ↗",
+  "nav.github": "GitHub ↗",
+  "tagline": "Graphiques SVG multiplateformes pour React et React Native",
+  "footer.text": "Construit avec <code>react-d3-viz</code> · installer via <code>npm i react-d3-viz</code>",
+  "footer.install": "installer via",
+  "language.english": "Anglais",
+  "language.french": "Français",
+  "language.arabic": "العربية",
+  "language.kannada": "ಕನ್ನಡ",
+  "playground.tryPlayground": "Essayer dans le playground →",
+  "terminal": "Terminal"
+}

@@ -1,0 +1,13 @@
+{
+  "docs.gettingStarted.title": "Premiers pas",
+  "docs.gettingStarted.intro": "Installez le paquet et importez le graphique dont vous avez besoin. Chaque graphique prend un tableau <code>data</code> plus quelques propriétés <em>accessor</em> (comme <code>x</code>, <code>value</code> ou <code>series</code>) qui indiquent quels champs lire.",
+  "docs.npm": "npm i react-d3-viz",
+  "docs.series": "Passez plusieurs séries via <code>series='{[{ dataKey: 'sales' }, …]}'</code>, ou une seule série avec le raccourci <code>y</code>. Les couleurs, les polices et l'espacement proviennent d'un <code>theme</code> que vous pouvez partiellement remplacer.",
+  "docs.seriesConfig.title": "SeriesConfig",
+  "docs.seriesConfig.desc": "Chaque entrée dans le tableau <code>series</code> d'un graphique (ou radar <code>series</code>) :",
+  "docs.props": "Propriétés",
+  "propDocs.prop": "Propriété",
+  "propDocs.type": "Type",
+  "propDocs.default": "Par défaut",
+  "propDocs.description": "Description"
+}
