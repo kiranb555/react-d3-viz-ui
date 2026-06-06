@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { charts, datasetByKey } from './registry';
 import type { Route } from './useHashRoute';
+import { ScrollToTopButton } from './ScrollToTopButton';
 
 export function Examples({ navigate }: { navigate: (r: Route) => void }) {
   const { t } = useTranslation(['common', 'registry']);
@@ -52,6 +53,7 @@ export function Examples({ navigate }: { navigate: (r: Route) => void }) {
           })}
         </div>
       ))}
+      <ScrollToTopButton />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { propDocs, seriesConfig, type PropDoc } from './propDocs';
 import { buildSnippet } from './snippet';
 import { CodeBlock } from './CodeBlock';
 import type { Route } from './useHashRoute';
+import { ScrollToTopButton } from './ScrollToTopButton';
 
 function PropsTable({ rows }: { rows: PropDoc[] }) {
   const { t } = useTranslation('docs');
@@ -69,6 +70,7 @@ export function Docs({ navigate }: { navigate: (r: Route) => void }) {
           </section>
         );
       })}
+      <ScrollToTopButton />
     </div>
   );
 }

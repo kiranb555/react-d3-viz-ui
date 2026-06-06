@@ -279,7 +279,44 @@ body { margin: 0; background: var(--bg); }
   border-bottom: 1px solid #eee;
 }
 
+/* Scroll to Top Button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, #6366f1 100%);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5);
+}
+
+.scroll-to-top-icon {
+  width: 24px;
+  height: 24px;
+}
+
 @media (max-width: 640px) {
+  .scroll-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+}
   /* Header adjustments */
   .header {
     padding: 12px 16px;
