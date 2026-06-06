@@ -1,0 +1,13 @@
+{
+  "docs.gettingStarted.title": "ابدأ",
+  "docs.gettingStarted.intro": "قم بتثبيت الحزمة واستيراد المخطط الذي تحتاجه. يأخذ كل مخطط مصفوفة <code>data</code> بالإضافة إلى عدة خصائص <em>accessor</em> (مثل <code>x</code> أو <code>value</code> أو <code>series</code>) التي تخبره بالحقول التي يجب قراءتها.",
+  "docs.npm": "npm i react-d3-viz",
+  "docs.series": "مرر السلاسل المتعددة عبر <code>series='{[{ dataKey: 'sales' }, …]}'</code>، أو سلسلة واحدة باستخدام اختصار <code>y</code>. تأتي الألوان والخطوط والمسافات من <code>theme</code> يمكنك تجاوزه جزئياً.",
+  "docs.seriesConfig.title": "SeriesConfig",
+  "docs.seriesConfig.desc": "كل إدخال في مصفوفة <code>series</code> الخاصة بالمخطط (أو radar <code>series</code>):",
+  "docs.props": "الخصائص",
+  "propDocs.prop": "خاصية",
+  "propDocs.type": "نوع",
+  "propDocs.default": "افتراضي",
+  "propDocs.description": "الوصف"
+}

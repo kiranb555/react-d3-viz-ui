@@ -1,0 +1,17 @@
+{
+  "nav.gallery": "Gallery",
+  "nav.examples": "Examples",
+  "nav.docs": "Docs",
+  "nav.playground": "Playground",
+  "nav.npm": "npm ↗",
+  "nav.github": "GitHub ↗",
+  "tagline": "Cross-platform SVG charts for React & React Native",
+  "footer.text": "Built with <code>react-d3-viz</code> · install via <code>npm i react-d3-viz</code>",
+  "footer.install": "install via",
+  "language.english": "English",
+  "language.french": "Français",
+  "language.arabic": "العربية",
+  "language.kannada": "ಕನ್ನಡ",
+  "playground.tryPlayground": "Try in playground →",
+  "terminal": "Terminal"
+}

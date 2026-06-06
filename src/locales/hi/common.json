@@ -1,0 +1,17 @@
+{
+  "nav.gallery": "गैलरी",
+  "nav.examples": "उदाहरण",
+  "nav.docs": "प्रलेखन",
+  "nav.playground": "खेल का मैदान",
+  "nav.npm": "npm ↗",
+  "nav.github": "GitHub ↗",
+  "tagline": "React और React Native के लिए क्रॉस-प्लेटफॉर्म SVG चार्ट",
+  "footer.text": "<code>react-d3-viz</code> के साथ बनाया गया · <code>npm i react-d3-viz</code> के माध्यम से स्थापित करें",
+  "footer.install": "के माध्यम से स्थापित करें",
+  "language.english": "English",
+  "language.french": "Français",
+  "language.arabic": "العربية",
+  "language.kannada": "ಕನ್ನಡ",
+  "playground.tryPlayground": "खेल के मैदान में कोशिश करें →",
+  "terminal": "टर्मिनल"
+}

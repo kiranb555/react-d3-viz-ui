@@ -1,18 +1,22 @@
+import { useTranslation } from 'react-i18next';
 import { charts } from './registry';
 import { propDocs, seriesConfig, type PropDoc } from './propDocs';
 import { buildSnippet } from './snippet';
 import { CodeBlock } from './CodeBlock';
 import type { Route } from './useHashRoute';
+import { ScrollToTopButton } from './ScrollToTopButton';
 
 function PropsTable({ rows }: { rows: PropDoc[] }) {
+  const { t } = useTranslation('docs');
+
   return (
     <table className="props-table">
       <thead>
         <tr>
-          <th>Prop</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
+          <th>{t('propDocs.prop', 'Prop')}</th>
+          <th>{t('propDocs.type', 'Type')}</th>
+          <th>{t('propDocs.default', 'Default')}</th>
+          <th>{t('propDocs.description', 'Description')}</th>
         </tr>
       </thead>
       <tbody>
@@ -30,25 +34,18 @@ function PropsTable({ rows }: { rows: PropDoc[] }) {
 }
 
 export function Docs({ navigate }: { navigate: (r: Route) => void }) {
+  const { t } = useTranslation(['docs', 'common', 'registry']);
+
   return (
     <div className="docs">
       <section className="docs-intro">
-        <h2>Getting started</h2>
-        <p>
-          Install the package and import the chart you need. Every chart takes a{' '}
-          <code>data</code> array plus a few <em>accessor</em> props (like{' '}
-          <code>x</code>, <code>value</code> or <code>series</code>) that tell it
-          which fields to read.
-        </p>
-        <CodeBlock code="npm i react-d3-viz" label="Terminal" />
-        <p>
-          Pass multiple series via <code>series={'{[{ dataKey: \'sales\' }, …]}'}</code>,
-          or a single series with the <code>y</code> shorthand. Colors, fonts and
-          spacing come from a <code>theme</code> you can partially override.
-        </p>
+        <h2>{t('docs.gettingStarted.title')}</h2>
+        <p>{t('docs.gettingStarted.intro')}</p>
+        <CodeBlock code={t('docs.npm')} label={t('terminal')} />
+        <p>{t('docs.series')}</p>
 
-        <h3>SeriesConfig</h3>
-        <p>Each entry in a chart&apos;s <code>series</code> (or radar <code>series</code>) array:</p>
+        <h3>{t('docs.seriesConfig.title')}</h3>
+        <p>{t('docs.seriesConfig.desc')}</p>
         <PropsTable rows={seriesConfig} />
       </section>
 
@@ -58,21 +55,22 @@ export function Docs({ navigate }: { navigate: (r: Route) => void }) {
         return (
           <section className="docs-chart" key={c.id}>
             <div className="docs-chart-head">
-              <h2>{c.title}</h2>
+              <h2>{t(`charts.${c.id}.title`, c.title)}</h2>
               <button
                 className="btn-link"
                 onClick={() => navigate({ view: 'playground', chartId: c.id })}
               >
-                Try in playground →
+                {t('playground.tryPlayground', 'Try in playground →')}
               </button>
             </div>
-            <p className="docs-blurb">{c.blurb}</p>
+            <p className="docs-blurb">{t(`charts.${c.id}.blurb`, c.blurb)}</p>
             <CodeBlock code={usage} label={`${c.componentName} usage`} />
-            <h3>Props</h3>
+            <h3>{t('docs.props')}</h3>
             <PropsTable rows={propDocs[c.id]} />
           </section>
         );
       })}
+      <ScrollToTopButton />
     </div>
   );
 }

@@ -1,0 +1,13 @@
+{
+  "docs.gettingStarted.title": "शुरुआत करना",
+  "docs.gettingStarted.intro": "पैकेज को स्थापित करें और आवश्यक चार्ट को आयात करें। प्रत्येक चार्ट एक <code>data</code> सरणी के साथ-साथ कुछ <em>accessor</em> props लेता है (जैसे <code>x</code>, <code>value</code> या <code>series</code>) जो बताते हैं कि कौन सी फ़ील्ड को पढ़ना है।",
+  "docs.npm": "npm i react-d3-viz",
+  "docs.series": "<code>series='{[{ dataKey: 'sales' }, …]}'</code> के माध्यम से कई सीरीज़ पास करें, या <code>y</code> शॉर्टहैंड के साथ एक एकल सीरीज़। रंग, फ़ॉन्ट और रिक्ति एक <code>theme</code> से आती है जिसे आप आंशिक रूप से अलग कर सकते हैं।",
+  "docs.seriesConfig.title": "SeriesConfig",
+  "docs.seriesConfig.desc": "चार्ट की <code>series</code> सरणी में प्रत्येक प्रविष्टि (या रडार <code>series</code>) :",
+  "docs.props": "गुण",
+  "propDocs.prop": "संपत्ति",
+  "propDocs.type": "प्रकार",
+  "propDocs.default": "डिफ़ॉल्ट",
+  "propDocs.description": "विवरण"
+}

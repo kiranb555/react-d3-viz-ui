@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { charts, chartById, datasetByKey } from './registry';
 import { ControlField, type PropValue } from './controls';
 import { buildSnippet } from './snippet';
@@ -16,6 +17,7 @@ export function Playground({
   preset?: number;
   navigate: (r: Route) => void;
 }) {
+  const { t } = useTranslation(['common', 'registry']);
   const def = chartById(chartId) ?? charts[0];
 
   // Starting point — honors an incoming preset (deep-linked from Examples): its
@@ -87,9 +89,9 @@ export function Playground({
 
           <div className="code">
             <div className="code-head">
-              <span>Code</span>
+              <span>{t('playground.code')}</span>
               <button className="btn" onClick={copy}>
-                {copied ? 'Copied!' : 'Copy'}
+                {copied ? t('playground.copied') : t('playground.copy')}
               </button>
             </div>
             <pre>
@@ -101,7 +103,7 @@ export function Playground({
         <aside className="panel">
           {def.datasets.length > 1 && (
             <div className="panel-section">
-              <div className="panel-title">Dataset</div>
+              <div className="panel-title">{t('playground.dataset')}</div>
               <label className="ctrl">
                 <select value={datasetKey} onChange={(e) => setDatasetKey(e.target.value)}>
                   {def.datasets.map((d) => (
@@ -115,14 +117,14 @@ export function Playground({
           )}
 
           <div className="panel-section">
-            <div className="panel-title">Props</div>
+            <div className="panel-title">{t('playground.props')}</div>
             {def.controls.map((ctrl) => (
               <ControlField key={ctrl.key} control={ctrl} value={props[ctrl.key]} onChange={onChange} />
             ))}
           </div>
 
           <div className="panel-section">
-            <div className="panel-title">Palette (theme)</div>
+            <div className="panel-title">{t('playground.palette')}</div>
             <div className="palettes">
               {palettes.map((p, i) => (
                 <button
@@ -140,7 +142,7 @@ export function Playground({
           </div>
 
           <button className="btn btn-ghost" onClick={reset}>
-            Reset
+            {t('playground.reset')}
           </button>
         </aside>
       </div>
