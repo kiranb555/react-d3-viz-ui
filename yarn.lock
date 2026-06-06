@@ -975,10 +975,10 @@ punycode@^2.1.0:
   resolved "https://registry.npmjs.org/punycode/-/punycode-2.3.1.tgz"
   integrity sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==
 
-react-d3-viz@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/react-d3-viz/-/react-d3-viz-1.1.1.tgz"
-  integrity sha512-8kWLp2xpqJXqb/8eMtW2n0PhqAZ7EkNP5CMK4ppIcPVgW46Jslrz1ZZbIGqD0PHe8qePPNhvmqZuugHYoN78yw==
+react-d3-viz@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.npmjs.org/react-d3-viz/-/react-d3-viz-1.2.3.tgz"
+  integrity sha512-9usWyQLZZiS0pQjt4piRyP3ANTAVhwEAWURq+UYtPQLTXIcHb5HL7NS/fjankwspmH3Ha3jTLl67zUx0bgDnzA==
   dependencies:
     d3-array "^3.2.4"
     d3-scale "^4.0.2"
