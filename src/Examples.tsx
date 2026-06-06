@@ -1,46 +1,32 @@
-import { charts, datasetByKey } from './registry';
+import { useTranslation } from 'react-i18next';
+import { charts } from './registry';
 import type { Route } from './useHashRoute';
 
 export function Examples({ navigate }: { navigate: (r: Route) => void }) {
+  const { t } = useTranslation(['common', 'registry']);
+
   return (
     <div className="examples">
-      <p className="page-lead">
-        Preset variants for every chart. Each card is a real configuration — open
-        it in the playground to tweak the props and copy the code.
-      </p>
-
-      {charts.map((c) => {
-        const Chart = c.Component;
-        return (
-          <section className="example-group" key={c.id}>
-            <h2 className="example-group-title">{c.title}</h2>
-            <div className="gallery">
-              {c.examples.map((ex, i) => {
-                const ds = datasetByKey(c, ex.datasetKey);
-                return (
-                  <div className="card" key={ex.title}>
-                    <div className="card-head">
-                      <h3>{ex.title}</h3>
-                      <button
-                        className="btn-link"
-                        onClick={() =>
-                          navigate({ view: 'playground', chartId: c.id, dataset: ds.key, preset: i })
-                        }
-                      >
-                        Open in playground →
-                      </button>
-                    </div>
-                    <p className="card-blurb">{ex.description}</p>
-                    <div className="card-chart">
-                      <Chart {...c.defaultProps} {...ds.props} {...ex.props} />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-        );
-      })}
+      {charts.map((c) => (
+        <div key={c.id} className="examples-chart">
+          <h2>{t(`charts.${c.id}.title`, c.title)}</h2>
+          {c.examples.map((ex, idx) => {
+            const exampleKey = ex.title.toLowerCase().replace(/\s+/g, '');
+            return (
+              <div key={idx} className="examples-preset">
+                <h3>{t(`charts.${c.id}.examples.${exampleKey}.title`, ex.title)}</h3>
+                <p>{t(`charts.${c.id}.examples.${exampleKey}.description`, ex.description)}</p>
+                <button
+                  className="btn-link"
+                  onClick={() => navigate({ view: 'playground', chartId: c.id, preset: ex.title })}
+                >
+                  {t('playground.tryPlayground', 'Try in playground →')}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 }
