@@ -30,8 +30,11 @@ body { margin: 0; background: var(--bg); }
 /* Header */
 .header {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; padding: 16px 28px; background: var(--panel);
+  gap: 16px; padding: 16px 28px; background: linear-gradient(135deg, #eef2ff 0%, #f0f4ff 100%);
   border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; flex-wrap: wrap;
+}
+[data-theme="dark"] .header {
+  background: linear-gradient(135deg, #1a1d35 0%, #1e2245 100%);
 }
 .brand h1 { margin: 0; font-size: 20px; letter-spacing: -0.02em; }
 .brand .tagline { font-size: 13px; color: var(--muted); }
@@ -226,7 +229,8 @@ body { margin: 0; background: var(--bg); }
 }
 .btn-ghost { width: 100%; }
 
-.footer { padding: 20px 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; text-align: center; background: var(--panel); }
+.footer { padding: 20px 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; text-align: center; background: linear-gradient(135deg, #f0f4ff 0%, #eef2ff 100%); }
+[data-theme="dark"] .footer { background: linear-gradient(135deg, #1e2245 0%, #1a1d35 100%); }
 .footer code { background: #f3f4f6; padding: 1px 6px; border-radius: 5px; font-size: 12px; }
 [data-theme="dark"] .footer code { background: #23273a; }
 .footer-heart { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; font-size: 13px; color: var(--muted); }
