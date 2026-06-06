@@ -1,0 +1,17 @@
+{
+  "nav.gallery": "ಗ್ಯಾಲರಿ",
+  "nav.examples": "ಉದಾಹರಣೆಗಳು",
+  "nav.docs": "ದಸ್ತಾವೇಜೀಕರಣ",
+  "nav.playground": "ಆಟದ ಮೈದಾನ",
+  "nav.npm": "npm ↗",
+  "nav.github": "GitHub ↗",
+  "tagline": "React ಮತ್ತು React Native ಗಾಗಿ ಕ್ರಾಸ್-ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ SVG ಚಾರ್ಟ್‌ಗಳು",
+  "footer.text": "<code>react-d3-viz</code> ನೊಂದಿಗೆ ನಿರ್ಮಿತ · <code>npm i react-d3-viz</code> ನ ಮೂಲಕ ಸ್ಥಾಪಿಸಿ",
+  "footer.install": "ಮೂಲಕ ಸ್ಥಾಪಿಸಿ",
+  "language.english": "English",
+  "language.french": "Français",
+  "language.arabic": "العربية",
+  "language.kannada": "ಕನ್ನಡ",
+  "playground.tryPlayground": "ಆಟದ ಮೈದಾನದಲ್ಲಿ ಪ್ರಯತ್ನಿಸಿ ←",
+  "terminal": "ಟರ್ಮಿನಲ್"
+}
