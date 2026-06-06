@@ -60,10 +60,21 @@ body { margin: 0; background: var(--bg); }
 
 .playground-btn:hover {
   background: linear-gradient(135deg, #fb923c 0%, #f97316 100%) !important;
+  color: white !important;
 }
 
 .playground-btn.nav-active {
   background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+  color: white !important;
+}
+
+[data-theme="dark"] .playground-btn {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+  color: white !important;
+}
+
+[data-theme="dark"] .playground-btn:hover {
+  background: linear-gradient(135deg, #fb923c 0%, #f97316 100%) !important;
 }
 .nav-icon {
   width: 18px;

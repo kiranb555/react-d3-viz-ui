@@ -19,7 +19,7 @@ export function Gallery({ navigate }: { navigate: (r: Route) => void }) {
             <h3>{t(`charts.${c.id}.title`, c.title)}</h3>
             <p>{t(`charts.${c.id}.blurb`, c.blurb)}</p>
             <button
-              className="btn btn-with-icon"
+              className="btn btn-with-icon playground-btn"
               onClick={() => navigate({ view: 'playground', chartId: c.id })}
             >
               <PlayIcon className="btn-icon" />
