@@ -504,10 +504,24 @@ body { margin: 0; background: var(--bg); }
     font-size: 12px;
   }
 
-  /* Theme toggle mobile */
+  /* Theme toggle & language switcher mobile */
   .theme-toggle {
     width: 100%;
     justify-content: flex-start;
     padding: 10px 12px;
+  }
+
+  .language-switcher {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .language-button {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 10px 12px;
+    border: none;
+    font-size: 14px;
   }
 }
