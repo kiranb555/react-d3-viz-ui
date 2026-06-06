@@ -229,6 +229,8 @@ body { margin: 0; background: var(--bg); }
 .footer { padding: 20px 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; text-align: center; background: var(--panel); }
 .footer code { background: #f3f4f6; padding: 1px 6px; border-radius: 5px; font-size: 12px; }
 [data-theme="dark"] .footer code { background: #23273a; }
+.footer-heart { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; font-size: 13px; color: var(--muted); }
+.heart-icon { width: 16px; height: 16px; color: #ef4444; fill: #ef4444; }
 
 .language-switcher {
   margin-left: auto;

@@ -18,7 +18,8 @@ import {
   DocumentTextIcon,
   PlayIcon,
   Bars3Icon,
-  ArrowTopRightOnSquareIcon
+  ArrowTopRightOnSquareIcon,
+  HeartIcon
 } from '@heroicons/react/24/outline';
 
 export default function App() {
@@ -133,6 +134,9 @@ export default function App() {
 
       <footer className="footer">
         <div dangerouslySetInnerHTML={{ __html: t('footer.text') }} />
+        <div className="footer-heart">
+          Built with <HeartIcon className="heart-icon" />
+        </div>
       </footer>
     </div>
   );
