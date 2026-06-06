@@ -464,11 +464,17 @@ body { margin: 0; background: var(--bg); }
     max-width: 100%;
   }
   .props-table {
-    font-size: 12px;
+    font-size: 11px;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
   .props-table th,
   .props-table td {
     padding: 6px 8px;
+  }
+  .props-table th {
+    font-size: 10px;
   }
 
   /* Playground controls below chart */
