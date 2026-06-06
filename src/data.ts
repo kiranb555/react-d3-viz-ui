@@ -317,3 +317,19 @@ export const butterflyDepartment = [
   { department: 'Marketing', male: 5, female: 8 },
   { department: 'HR', male: 3, female: 7 },
 ];
+
+// --- heatmap shape: rows x columns with numeric values -------------------------
+export const heatmapSales = [
+  { product: 'Laptop', 'North America': 450, 'Europe': 320, 'Asia': 280, 'LATAM': 180 },
+  { product: 'Phone', 'North America': 520, 'Europe': 480, 'Asia': 650, 'LATAM': 220 },
+  { product: 'Tablet', 'North America': 280, 'Europe': 290, 'Asia': 410, 'LATAM': 150 },
+  { product: 'Wearable', 'North America': 180, 'Europe': 200, 'Asia': 350, 'LATAM': 100 },
+  { product: 'Software', 'North America': 720, 'Europe': 680, 'Asia': 450, 'LATAM': 300 },
+];
+
+export const heatmapUtilization = [
+  { team: 'Team A', Mon: 85, Tue: 92, Wed: 78, Thu: 88, Fri: 95 },
+  { team: 'Team B', Mon: 70, Tue: 75, Wed: 82, Thu: 80, Fri: 73 },
+  { team: 'Team C', Mon: 92, Tue: 88, Wed: 95, Thu: 90, Fri: 85 },
+  { team: 'Team D', Mon: 60, Tue: 65, Wed: 68, Thu: 72, Fri: 75 },
+];

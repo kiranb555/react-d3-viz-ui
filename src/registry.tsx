@@ -13,6 +13,7 @@ import {
   SankeyDiagram,
   MekkoChart,
   ButterflyChart,
+  HeatmapChart,
 } from 'react-d3-viz';
 import {
   months,
@@ -38,6 +39,8 @@ import {
   mekkoMarket,
   butterflyPopulation,
   butterflyDepartment,
+  heatmapSales,
+  heatmapUtilization,
 } from './data';
 import type { Control } from './controls';
 
@@ -522,6 +525,38 @@ const butterflyDatasets: Dataset[] = [
   },
 ];
 
+// --- heatmap datasets --------------------------------------------------------
+const heatmapSalesCode = `const data = [
+  { product: 'Laptop', 'North America': 450, 'Europe': 320, … },
+  { product: 'Phone', 'North America': 520, 'Europe': 480, … },
+  // …3 more products
+];`;
+
+const heatmapUtilizationCode = `const data = [
+  { team: 'Team A', Mon: 85, Tue: 92, Wed: 78, … },
+  { team: 'Team B', Mon: 70, Tue: 75, Wed: 82, … },
+  // …2 more teams
+];`;
+
+const heatmapDatasets: Dataset[] = [
+  {
+    key: 'sales',
+    name: 'Regional sales',
+    props: { data: heatmapSales, x: 'product', y: (d: Record<string, unknown>) => Object.keys(d).filter(k => k !== 'product') as string[], value: (d: Record<string, unknown>, region: string) => d[region] },
+    dataCode: heatmapSalesCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+  {
+    key: 'utilization',
+    name: 'Team utilization',
+    props: { data: heatmapUtilization, x: 'team', y: (d: Record<string, unknown>) => Object.keys(d).filter(k => k !== 'team') as string[], value: (d: Record<string, unknown>, day: string) => d[day] },
+    dataCode: heatmapUtilizationCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+];
+
 export const charts: ChartDef[] = [
   {
     id: 'line',
@@ -779,6 +814,26 @@ export const charts: ChartDef[] = [
       { title: 'Age pyramid', description: 'Population distribution by age and gender.', datasetKey: 'population', props: {} },
       { title: 'Department gender', description: 'Staffing breakdown by department.', datasetKey: 'department', props: {} },
       { title: 'Custom left/right labels', description: 'Override default Male/Female labels.', datasetKey: 'population', props: { leftLabel: 'Men', rightLabel: 'Women' } },
+    ],
+  },
+  {
+    id: 'heatmap',
+    title: 'Heatmap',
+    blurb: 'Color-coded grid showing relationships across two dimensions.',
+    componentName: 'HeatmapChart',
+    Component: HeatmapChart,
+    datasets: heatmapDatasets,
+    defaultProps: { height: 320, cellPadding: 2, animate: true, showLegend: true },
+    controls: [
+      heightCtrl,
+      { key: 'cellPadding', label: 'cellPadding', type: 'number', min: 0, max: 8, step: 1 },
+      animateCtrl,
+      legendCtrl,
+    ],
+    examples: [
+      { title: 'Sales by region', description: 'Product revenue across North America, Europe, Asia, and LATAM.', datasetKey: 'sales', props: {} },
+      { title: 'Team utilization', description: 'Daily team utilization percentages (warm = busy).', datasetKey: 'utilization', props: {} },
+      { title: 'Dense cells', description: 'Minimal padding for a compact grid.', datasetKey: 'sales', props: { cellPadding: 0 } },
     ],
   },
 ];

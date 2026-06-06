@@ -180,6 +180,19 @@ const butterflyProps: PropDoc[] = [
   { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides (colors, fonts, etc.).' },
 ];
 
+const heatmapProps: PropDoc[] = [
+  { name: 'data', type: 'Datum[]', default: '—', description: 'Array of records. Required.' },
+  { name: 'x', type: 'string | (d) => unknown', default: '—', description: 'Row category accessor (product, team, etc.). Required.' },
+  { name: 'y', type: 'string[] | (d) => string[]', default: '—', description: 'Column category accessor or array of column names. Required.' },
+  { name: 'value', type: '(d, col) => number', default: '—', description: 'Function extracting the numeric value for a cell. Required.' },
+  { name: 'cellPadding', type: 'number', default: '2', description: 'Pixel gap between cells.' },
+  { name: 'colorScale', type: 'string | (val) => string', default: 'sequential', description: 'Color scale (sequential, diverging, or custom function).' },
+  { name: 'height', type: 'number', default: '300', description: 'Pixel height of the chart.' },
+  { name: 'showLegend', type: 'boolean', default: 'true', description: 'Show the color scale legend.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Enable enter animation.' },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
+];
+
 /** Prop reference keyed by chart id (matches registry ids). */
 export const propDocs: Record<string, PropDoc[]> = {
   line: [...cartesianProps, ...lineExtra],
@@ -195,4 +208,5 @@ export const propDocs: Record<string, PropDoc[]> = {
   sankey: sankeyProps,
   mekko: mekkoProps,
   butterfly: butterflyProps,
+  heatmap: heatmapProps,
 };
