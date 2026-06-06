@@ -51,6 +51,32 @@ body { margin: 0; background: var(--bg); }
 [data-theme="dark"] .nav button:hover { color: white; background: rgba(255, 255, 255, 0.2); }
 .nav button.nav-active { color: white; background: rgba(255, 255, 255, 0.3); }
 [data-theme="dark"] .nav button.nav-active { color: white; background: rgba(255, 255, 255, 0.3); }
+
+.playground-btn {
+  background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%) !important;
+  color: #7c2d12 !important;
+  border-color: transparent !important;
+}
+
+.playground-btn:hover {
+  background: linear-gradient(135deg, #fecaca 0%, #fed7aa 100%) !important;
+  color: #7c2d12 !important;
+}
+
+.playground-btn.nav-active {
+  background: linear-gradient(135deg, #fdba74 0%, #fb923c 100%) !important;
+  color: #7c2d12 !important;
+}
+
+[data-theme="dark"] .playground-btn {
+  background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%) !important;
+  color: #7c2d12 !important;
+}
+
+[data-theme="dark"] .playground-btn:hover {
+  background: linear-gradient(135deg, #fecaca 0%, #fed7aa 100%) !important;
+  color: #7c2d12 !important;
+}
 .nav-icon {
   width: 18px;
   height: 18px;
