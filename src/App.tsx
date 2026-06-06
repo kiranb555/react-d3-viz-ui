@@ -10,6 +10,14 @@ import { charts } from './registry';
 import { useTranslation } from 'react-i18next';
 import { useRTL } from './useRTL';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import {
+  PhotoIcon,
+  SparklesIcon,
+  DocumentTextIcon,
+  PlayIcon,
+  Bars3Icon,
+  ArrowTopRightOnSquareIcon
+} from 'heroicons/react/24/outline';
 
 export default function App() {
   const [route, navigate] = useHashRoute();
@@ -47,7 +55,7 @@ export default function App() {
           aria-label="Toggle navigation menu"
           aria-expanded={isMenuOpen}
         >
-          ☰
+          <Bars3Icon className="hamburger-icon" />
         </button>
         <nav className="nav">
           <button
@@ -56,8 +64,10 @@ export default function App() {
               navigate({ view: 'gallery' });
               closeMenu();
             }}
+            title={t('nav.gallery')}
           >
-            {t('nav.gallery')}
+            <PhotoIcon className="nav-icon" />
+            <span className="nav-label">{t('nav.gallery')}</span>
           </button>
           <button
             className={route.view === 'examples' ? 'nav-active' : ''}
@@ -65,8 +75,10 @@ export default function App() {
               navigate({ view: 'examples' });
               closeMenu();
             }}
+            title={t('nav.examples')}
           >
-            {t('nav.examples')}
+            <SparklesIcon className="nav-icon" />
+            <span className="nav-label">{t('nav.examples')}</span>
           </button>
           <button
             className={route.view === 'docs' ? 'nav-active' : ''}
@@ -74,8 +86,10 @@ export default function App() {
               navigate({ view: 'docs' });
               closeMenu();
             }}
+            title={t('nav.docs')}
           >
-            {t('nav.docs')}
+            <DocumentTextIcon className="nav-icon" />
+            <span className="nav-label">{t('nav.docs')}</span>
           </button>
           <button
             className={route.view === 'playground' ? 'nav-active' : ''}
@@ -83,14 +97,16 @@ export default function App() {
               navigate({ view: 'playground', chartId: charts[0].id });
               closeMenu();
             }}
+            title={t('nav.playground')}
           >
-            {t('nav.playground')}
+            <PlayIcon className="nav-icon" />
+            <span className="nav-label">{t('nav.playground')}</span>
           </button>
-          <a className="nav-ext" href="https://www.npmjs.com/package/react-d3-viz" target="_blank" rel="noreferrer">
-            {t('nav.npm')}
+          <a className="nav-ext" href="https://www.npmjs.com/package/react-d3-viz" target="_blank" rel="noreferrer" title={t('nav.npm')}>
+            npm <ArrowTopRightOnSquareIcon className="nav-ext-icon" />
           </a>
-          <a className="nav-ext" href="https://github.com/kiranb555/react-d3-viz" target="_blank" rel="noreferrer">
-            {t('nav.github')}
+          <a className="nav-ext" href="https://github.com/kiranb555/react-d3-viz" target="_blank" rel="noreferrer" title={t('nav.github')}>
+            GitHub <ArrowTopRightOnSquareIcon className="nav-ext-icon" />
           </a>
           <LanguageSwitcher />
         </nav>

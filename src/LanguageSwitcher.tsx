@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { GlobeAltIcon, ChevronDownIcon } from 'heroicons/react/24/outline';
 
 export function LanguageSwitcher() {
   const { i18n } = useTranslation();
@@ -28,7 +29,9 @@ export function LanguageSwitcher() {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Change language"
       >
-        {currentLang?.native || 'EN'}
+        <GlobeAltIcon className="language-icon" />
+        <span>{currentLang?.native || 'EN'}</span>
+        <ChevronDownIcon className={`language-chevron ${isOpen ? 'open' : ''}`} />
       </button>
       {isOpen && (
         <div className="language-dropdown">
