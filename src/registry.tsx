@@ -533,33 +533,33 @@ const butterflyDatasets: Dataset[] = [
 
 // --- heatmap datasets --------------------------------------------------------
 const heatmapSalesCode = `const data = [
-  { product: 'Laptop', 'North America': 450, 'Europe': 320, … },
-  { product: 'Phone', 'North America': 520, 'Europe': 480, … },
-  // …3 more products
+  { product: 'Laptop', region: 'North America', value: 450 },
+  { product: 'Laptop', region: 'Europe', value: 320 },
+  // …18 more rows
 ];`;
 
 const heatmapUtilizationCode = `const data = [
-  { team: 'Team A', Mon: 85, Tue: 92, Wed: 78, … },
-  { team: 'Team B', Mon: 70, Tue: 75, Wed: 82, … },
-  // …2 more teams
+  { team: 'Team A', day: 'Mon', value: 85 },
+  { team: 'Team A', day: 'Tue', value: 92 },
+  // …18 more rows
 ];`;
 
 const heatmapDatasets: Dataset[] = [
   {
     key: 'sales',
     name: 'Regional sales',
-    props: { data: heatmapSales, x: 'product', y: (d: Record<string, unknown>) => Object.keys(d).filter(k => k !== 'product') as string[], value: (d: Record<string, unknown>, region: string) => d[region] },
+    props: { data: heatmapSales, rowKey: 'product', columnKey: 'region', valueKey: 'value' },
     dataCode: heatmapSalesCode,
     dataAttr: 'data={data}',
-    accessors: {},
+    accessors: { rowKey: 'product', columnKey: 'region', valueKey: 'value' },
   },
   {
     key: 'utilization',
     name: 'Team utilization',
-    props: { data: heatmapUtilization, x: 'team', y: (d: Record<string, unknown>) => Object.keys(d).filter(k => k !== 'team') as string[], value: (d: Record<string, unknown>, day: string) => d[day] },
+    props: { data: heatmapUtilization, rowKey: 'team', columnKey: 'day', valueKey: 'value' },
     dataCode: heatmapUtilizationCode,
     dataAttr: 'data={data}',
-    accessors: {},
+    accessors: { rowKey: 'team', columnKey: 'day', valueKey: 'value' },
   },
 ];
 
@@ -597,18 +597,18 @@ const sunburstDatasets: Dataset[] = [
   {
     key: 'org',
     name: 'Organization',
-    props: { data: sunburstOrg },
+    props: { data: sunburstOrg, value: 'value', label: 'name', childrenKey: 'children' },
     dataCode: sunburstOrgCode,
     dataAttr: 'data={data}',
-    accessors: {},
+    accessors: { value: 'value', label: 'name', childrenKey: 'children' },
   },
   {
     key: 'files',
     name: 'File sizes',
-    props: { data: sunburstFiles },
+    props: { data: sunburstFiles, value: 'value', label: 'name', childrenKey: 'children' },
     dataCode: sunburstFilesCode,
     dataAttr: 'data={data}',
-    accessors: {},
+    accessors: { value: 'value', label: 'name', childrenKey: 'children' },
   },
 ];
 
