@@ -181,16 +181,16 @@ const butterflyProps: PropDoc[] = [
 ];
 
 const heatmapProps: PropDoc[] = [
-  { name: 'data', type: 'Datum[]', default: '—', description: 'Array of records. Required.' },
-  { name: 'x', type: 'string | (d) => unknown', default: '—', description: 'Row category accessor (product, team, etc.). Required.' },
-  { name: 'y', type: 'string[] | (d) => string[]', default: '—', description: 'Column category accessor or array of column names. Required.' },
-  { name: 'value', type: '(d, col) => number', default: '—', description: 'Function extracting the numeric value for a cell. Required.' },
-  { name: 'cellPadding', type: 'number', default: '2', description: 'Pixel gap between cells.' },
-  { name: 'colorScale', type: 'string | (val) => string', default: 'sequential', description: 'Color scale (sequential, diverging, or custom function).' },
-  { name: 'height', type: 'number', default: '300', description: 'Pixel height of the chart.' },
-  { name: 'showLegend', type: 'boolean', default: 'true', description: 'Show the color scale legend.' },
+  { name: 'data', type: 'Datum[]', default: '—', description: 'Array of records in long format (rowKey, columnKey, valueKey). Required.' },
+  { name: 'rowKey', type: 'string | (d) => string', default: '—', description: 'Row category accessor (product, team, etc.). Required.' },
+  { name: 'columnKey', type: 'string | (d) => string', default: '—', description: 'Column category accessor (region, day, etc.). Required.' },
+  { name: 'valueKey', type: 'string | (d) => number', default: '—', description: 'Numeric value accessor for cell coloring. Required.' },
+  { name: 'height', type: 'number', default: '400', description: 'Pixel height of the chart.' },
+  { name: 'width', type: 'number | "auto"', default: '"auto"', description: 'Pixel width of the chart.' },
+  { name: 'colorScaleMode', type: '"linear" | "diverging"', default: '"linear"', description: 'Color scale mode.' },
+  { name: 'showXLabels', type: 'boolean', default: 'true', description: 'Show column labels.' },
+  { name: 'showYLabels', type: 'boolean', default: 'true', description: 'Show row labels.' },
   { name: 'animate', type: 'boolean', default: 'true', description: 'Enable enter animation.' },
-  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
 ];
 
 const sunburstProps: PropDoc[] = [

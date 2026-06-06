@@ -318,20 +318,51 @@ export const butterflyDepartment = [
   { department: 'HR', male: 3, female: 7 },
 ];
 
-// --- heatmap shape: rows x columns with numeric values -------------------------
+// --- heatmap shape: flattened to rowKey, columnKey, valueKey format ----------------
 export const heatmapSales = [
-  { product: 'Laptop', 'North America': 450, 'Europe': 320, 'Asia': 280, 'LATAM': 180 },
-  { product: 'Phone', 'North America': 520, 'Europe': 480, 'Asia': 650, 'LATAM': 220 },
-  { product: 'Tablet', 'North America': 280, 'Europe': 290, 'Asia': 410, 'LATAM': 150 },
-  { product: 'Wearable', 'North America': 180, 'Europe': 200, 'Asia': 350, 'LATAM': 100 },
-  { product: 'Software', 'North America': 720, 'Europe': 680, 'Asia': 450, 'LATAM': 300 },
+  { product: 'Laptop', region: 'North America', value: 450 },
+  { product: 'Laptop', region: 'Europe', value: 320 },
+  { product: 'Laptop', region: 'Asia', value: 280 },
+  { product: 'Laptop', region: 'LATAM', value: 180 },
+  { product: 'Phone', region: 'North America', value: 520 },
+  { product: 'Phone', region: 'Europe', value: 480 },
+  { product: 'Phone', region: 'Asia', value: 650 },
+  { product: 'Phone', region: 'LATAM', value: 220 },
+  { product: 'Tablet', region: 'North America', value: 280 },
+  { product: 'Tablet', region: 'Europe', value: 290 },
+  { product: 'Tablet', region: 'Asia', value: 410 },
+  { product: 'Tablet', region: 'LATAM', value: 150 },
+  { product: 'Wearable', region: 'North America', value: 180 },
+  { product: 'Wearable', region: 'Europe', value: 200 },
+  { product: 'Wearable', region: 'Asia', value: 350 },
+  { product: 'Wearable', region: 'LATAM', value: 100 },
+  { product: 'Software', region: 'North America', value: 720 },
+  { product: 'Software', region: 'Europe', value: 680 },
+  { product: 'Software', region: 'Asia', value: 450 },
+  { product: 'Software', region: 'LATAM', value: 300 },
 ];
 
 export const heatmapUtilization = [
-  { team: 'Team A', Mon: 85, Tue: 92, Wed: 78, Thu: 88, Fri: 95 },
-  { team: 'Team B', Mon: 70, Tue: 75, Wed: 82, Thu: 80, Fri: 73 },
-  { team: 'Team C', Mon: 92, Tue: 88, Wed: 95, Thu: 90, Fri: 85 },
-  { team: 'Team D', Mon: 60, Tue: 65, Wed: 68, Thu: 72, Fri: 75 },
+  { team: 'Team A', day: 'Mon', value: 85 },
+  { team: 'Team A', day: 'Tue', value: 92 },
+  { team: 'Team A', day: 'Wed', value: 78 },
+  { team: 'Team A', day: 'Thu', value: 88 },
+  { team: 'Team A', day: 'Fri', value: 95 },
+  { team: 'Team B', day: 'Mon', value: 70 },
+  { team: 'Team B', day: 'Tue', value: 75 },
+  { team: 'Team B', day: 'Wed', value: 82 },
+  { team: 'Team B', day: 'Thu', value: 80 },
+  { team: 'Team B', day: 'Fri', value: 73 },
+  { team: 'Team C', day: 'Mon', value: 92 },
+  { team: 'Team C', day: 'Tue', value: 88 },
+  { team: 'Team C', day: 'Wed', value: 95 },
+  { team: 'Team C', day: 'Thu', value: 90 },
+  { team: 'Team C', day: 'Fri', value: 85 },
+  { team: 'Team D', day: 'Mon', value: 60 },
+  { team: 'Team D', day: 'Tue', value: 65 },
+  { team: 'Team D', day: 'Wed', value: 68 },
+  { team: 'Team D', day: 'Thu', value: 72 },
+  { team: 'Team D', day: 'Fri', value: 75 },
 ];
 
 // --- sunburst shape: hierarchical data with nested children --------
