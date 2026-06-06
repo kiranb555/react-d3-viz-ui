@@ -18,7 +18,7 @@ export function Examples({ navigate }: { navigate: (r: Route) => void }) {
                 <p>{t(`charts.${c.id}.examples.${exampleKey}.description`, ex.description)}</p>
                 <button
                   className="btn-link"
-                  onClick={() => navigate({ view: 'playground', chartId: c.id, preset: ex.title })}
+                  onClick={() => navigate({ view: 'playground', chartId: c.id, preset: idx })}
                 >
                   {t('playground.tryPlayground', 'Try in playground →')}
                 </button>
