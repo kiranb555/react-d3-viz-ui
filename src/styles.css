@@ -51,6 +51,20 @@ body { margin: 0; background: var(--bg); }
 [data-theme="dark"] .nav button:hover { color: white; background: rgba(255, 255, 255, 0.2); }
 .nav button.nav-active { color: white; background: rgba(255, 255, 255, 0.3); }
 [data-theme="dark"] .nav button.nav-active { color: white; background: rgba(255, 255, 255, 0.3); }
+
+.playground-btn {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+  color: white !important;
+  border-color: transparent !important;
+}
+
+.playground-btn:hover {
+  background: linear-gradient(135deg, #fb923c 0%, #f97316 100%) !important;
+}
+
+.playground-btn.nav-active {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+}
 .nav-icon {
   width: 18px;
   height: 18px;

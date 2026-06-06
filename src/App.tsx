@@ -96,7 +96,7 @@ export default function App() {
             <span className="nav-label">{t('nav.docs')}</span>
           </button>
           <button
-            className={route.view === 'playground' ? 'nav-active' : ''}
+            className={`playground-btn ${route.view === 'playground' ? 'nav-active' : ''}`}
             onClick={() => {
               navigate({ view: 'playground', chartId: charts[0].id });
               closeMenu();
