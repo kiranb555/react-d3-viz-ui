@@ -193,6 +193,19 @@ const heatmapProps: PropDoc[] = [
   { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
 ];
 
+const sunburstProps: PropDoc[] = [
+  { name: 'data', type: 'HierarchyNode', default: '—', description: 'Nested object with name, children, and optional value. Required.' },
+  { name: 'value', type: 'string | (d) => number', default: 'value', description: 'Accessor for leaf node size (outer ring cell area).' },
+  { name: 'label', type: 'string | (d) => string', default: 'name', description: 'Accessor for cell label text (shown in cells and tooltip).' },
+  { name: 'childrenKey', type: 'string', default: "'children'", description: 'Key containing nested children array.' },
+  { name: 'innerRadius', type: 'number', default: '0', description: 'Inner hole size in pixels. 0 = pie, >0 = sunburst rings.' },
+  { name: 'showLabels', type: 'boolean', default: 'true', description: 'Show text labels inside cells.' },
+  { name: 'showLegend', type: 'boolean', default: 'true', description: 'Show the interactive legend.' },
+  { name: 'height', type: 'number', default: '400', description: 'Pixel height of the chart.' },
+  { name: 'animate', type: 'boolean', default: 'true', description: 'Enable enter animation.' },
+  { name: 'theme', type: 'DeepPartial<ChartTheme>', default: 'defaultTheme', description: 'Theme overrides.' },
+];
+
 /** Prop reference keyed by chart id (matches registry ids). */
 export const propDocs: Record<string, PropDoc[]> = {
   line: [...cartesianProps, ...lineExtra],
@@ -209,4 +222,5 @@ export const propDocs: Record<string, PropDoc[]> = {
   mekko: mekkoProps,
   butterfly: butterflyProps,
   heatmap: heatmapProps,
+  sunburst: sunburstProps,
 };

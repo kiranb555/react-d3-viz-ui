@@ -14,6 +14,7 @@ import {
   MekkoChart,
   ButterflyChart,
   HeatmapChart,
+  SunburstChart,
 } from 'react-d3-viz';
 import {
   months,
@@ -41,6 +42,8 @@ import {
   butterflyDepartment,
   heatmapSales,
   heatmapUtilization,
+  sunburstOrg,
+  sunburstFiles,
 } from './data';
 import type { Control } from './controls';
 
@@ -557,6 +560,55 @@ const heatmapDatasets: Dataset[] = [
   },
 ];
 
+// --- sunburst datasets -------------------------------------------------------
+const sunburstOrgCode = `const data = {
+  name: 'Company',
+  children: [
+    {
+      name: 'Engineering',
+      children: [
+        { name: 'Frontend', value: 8 },
+        { name: 'Backend', value: 6 },
+        // …more teams
+      ],
+    },
+    // …more departments
+  ],
+};`;
+
+const sunburstFilesCode = `const data = {
+  name: 'project',
+  children: [
+    {
+      name: 'src',
+      children: [
+        { name: 'components', value: 2500 },
+        // …more
+      ],
+    },
+    // …more folders
+  ],
+};`;
+
+const sunburstDatasets: Dataset[] = [
+  {
+    key: 'org',
+    name: 'Organization',
+    props: { data: sunburstOrg },
+    dataCode: sunburstOrgCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+  {
+    key: 'files',
+    name: 'File sizes',
+    props: { data: sunburstFiles },
+    dataCode: sunburstFilesCode,
+    dataAttr: 'data={data}',
+    accessors: {},
+  },
+];
+
 export const charts: ChartDef[] = [
   {
     id: 'line',
@@ -834,6 +886,27 @@ export const charts: ChartDef[] = [
       { title: 'Sales by region', description: 'Product revenue across North America, Europe, Asia, and LATAM.', datasetKey: 'sales', props: {} },
       { title: 'Team utilization', description: 'Daily team utilization percentages (warm = busy).', datasetKey: 'utilization', props: {} },
       { title: 'Dense cells', description: 'Minimal padding for a compact grid.', datasetKey: 'sales', props: { cellPadding: 0 } },
+    ],
+  },
+  {
+    id: 'sunburst',
+    title: 'Sunburst',
+    blurb: 'Hierarchical radial chart showing nested data as concentric rings.',
+    componentName: 'SunburstChart',
+    Component: SunburstChart,
+    datasets: sunburstDatasets,
+    defaultProps: { height: 400, innerRadius: 60, animate: true, showLabels: true, showLegend: true },
+    controls: [
+      heightCtrl,
+      { key: 'innerRadius', label: 'innerRadius', type: 'number', min: 0, max: 150, step: 10 },
+      { key: 'showLabels', label: 'showLabels', type: 'boolean' },
+      legendCtrl,
+      animateCtrl,
+    ],
+    examples: [
+      { title: 'Organization', description: 'Company hierarchy: departments and teams.', datasetKey: 'org', props: {} },
+      { title: 'File sizes', description: 'Project structure with file sizes.', datasetKey: 'files', props: {} },
+      { title: 'Legend only', description: 'Hide labels for a clean visual.', datasetKey: 'org', props: { showLabels: false } },
     ],
   },
 ];

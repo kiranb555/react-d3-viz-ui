@@ -333,3 +333,56 @@ export const heatmapUtilization = [
   { team: 'Team C', Mon: 92, Tue: 88, Wed: 95, Thu: 90, Fri: 85 },
   { team: 'Team D', Mon: 60, Tue: 65, Wed: 68, Thu: 72, Fri: 75 },
 ];
+
+// --- sunburst shape: hierarchical data with nested children --------
+export const sunburstOrg = {
+  name: 'Company',
+  children: [
+    {
+      name: 'Engineering',
+      children: [
+        { name: 'Frontend', value: 8 },
+        { name: 'Backend', value: 6 },
+        { name: 'DevOps', value: 3 },
+      ],
+    },
+    {
+      name: 'Sales',
+      children: [
+        { name: 'Enterprise', value: 5 },
+        { name: 'SMB', value: 4 },
+      ],
+    },
+    {
+      name: 'Operations',
+      children: [
+        { name: 'HR', value: 4 },
+        { name: 'Finance', value: 3 },
+        { name: 'Legal', value: 2 },
+      ],
+    },
+  ],
+};
+
+export const sunburstFiles = {
+  name: 'project',
+  children: [
+    {
+      name: 'src',
+      children: [
+        { name: 'components', value: 2500 },
+        { name: 'utils', value: 1200 },
+        { name: 'hooks', value: 800 },
+      ],
+    },
+    {
+      name: 'tests',
+      children: [
+        { name: 'unit', value: 3000 },
+        { name: 'integration', value: 2000 },
+      ],
+    },
+    { name: 'dist', value: 5000 },
+    { name: 'docs', value: 800 },
+  ],
+};
