@@ -1,0 +1,17 @@
+{
+  "nav.gallery": "Galerie",
+  "nav.examples": "Beispiele",
+  "nav.docs": "Dokumentation",
+  "nav.playground": "Spielplatz",
+  "nav.npm": "npm ↗",
+  "nav.github": "GitHub ↗",
+  "tagline": "Plattformübergreifende SVG-Diagramme für React und React Native",
+  "footer.text": "Erstellt mit <code>react-d3-viz</code> · Installation via <code>npm i react-d3-viz</code>",
+  "footer.install": "Installation via",
+  "language.english": "English",
+  "language.french": "Français",
+  "language.arabic": "العربية",
+  "language.kannada": "ಕನ್ನಡ",
+  "playground.tryPlayground": "Im Spielplatz ausprobieren →",
+  "terminal": "Terminal"
+}
