@@ -17,7 +17,7 @@ import {
   PlayIcon,
   Bars3Icon,
   ArrowTopRightOnSquareIcon
-} from 'heroicons/react/24/outline';
+} from '@heroicons/react/24/outline';
 
 export default function App() {
   const [route, navigate] = useHashRoute();
