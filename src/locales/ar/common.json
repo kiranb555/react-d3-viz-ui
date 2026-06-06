@@ -1,0 +1,17 @@
+{
+  "nav.gallery": "المعرض",
+  "nav.examples": "أمثلة",
+  "nav.docs": "التوثيق",
+  "nav.playground": "ساحة اللعب",
+  "nav.npm": "npm ↗",
+  "nav.github": "GitHub ↗",
+  "tagline": "رسوم بيانية SVG متعددة الأنظمة الأساسية لـ React و React Native",
+  "footer.text": "مصنوع باستخدام <code>react-d3-viz</code> · التثبيت عبر <code>npm i react-d3-viz</code>",
+  "footer.install": "التثبيت عبر",
+  "language.english": "English",
+  "language.french": "Français",
+  "language.arabic": "العربية",
+  "language.kannada": "ಕನ್ನಡ",
+  "playground.tryPlayground": "جرب في ساحة اللعب ←",
+  "terminal": "Terminal"
+}
