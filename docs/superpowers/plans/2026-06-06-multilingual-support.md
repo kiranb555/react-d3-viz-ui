@@ -294,7 +294,7 @@ git commit -m "feat: add English common translations"
   "charts.bubble.examples.wider.description": "Exaggerated bubble sizes.",
   
   "charts.pie.title": "Pie / Donut",
-  "charts.pie.blurb": "Pie chart; set innerRadius for a donut.",
+  "charts.pie.blurb": "Pie chart, set innerRadius for a donut.",
   "charts.pie.examples.pie.title": "Pie",
   "charts.pie.examples.pie.description": "Classic full pie with labels.",
   "charts.pie.examples.donut.title": "Donut",

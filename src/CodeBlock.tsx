@@ -1,8 +1,18 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import hljs from 'highlight.js';
+import { DocumentDuplicateIcon, CheckIcon } from '@heroicons/react/24/outline';
 
 /** A code block with a copy-to-clipboard button (same UX as the playground). */
 export function CodeBlock({ code, label = 'Code' }: { code: string; label?: string }) {
   const [copied, setCopied] = useState(false);
+
+  const highlightedCode = useMemo(() => {
+    try {
+      return hljs.highlight(code, { language: 'jsx' }).value;
+    } catch {
+      return hljs.highlightAuto(code).value;
+    }
+  }, [code]);
 
   const copy = async () => {
     try {
@@ -18,12 +28,12 @@ export function CodeBlock({ code, label = 'Code' }: { code: string; label?: stri
     <div className="code">
       <div className="code-head">
         <span>{label}</span>
-        <button className="btn" onClick={copy}>
-          {copied ? 'Copied!' : 'Copy'}
+        <button className="btn" onClick={copy} title={copied ? 'Copied!' : 'Copy code'}>
+          {copied ? <CheckIcon width={20} height={20} /> : <DocumentDuplicateIcon width={20} height={20} />}
         </button>
       </div>
       <pre>
-        <code>{code}</code>
+        <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
       </pre>
     </div>
   );

@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DocumentDuplicateIcon, CheckIcon } from '@heroicons/react/24/outline';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
 import { charts, chartById, datasetByKey } from './registry';
 import { ControlField, type PropValue } from './controls';
 import { buildSnippet } from './snippet';
@@ -49,6 +52,14 @@ export function Playground({
     [def.componentName, ds, renderProps],
   );
 
+  const highlightedCode = useMemo(() => {
+    try {
+      return hljs.highlight(code, { language: 'jsx' }).value;
+    } catch {
+      return hljs.highlightAuto(code).value;
+    }
+  }, [code]);
+
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(code);
@@ -90,12 +101,12 @@ export function Playground({
           <div className="code">
             <div className="code-head">
               <span>{t('playground.code')}</span>
-              <button className="btn" onClick={copy}>
-                {copied ? t('playground.copied') : t('playground.copy')}
+              <button className="btn" onClick={copy} title={copied ? t('playground.copied') : t('playground.copy')}>
+                {copied ? <CheckIcon width={20} height={20} /> : <DocumentDuplicateIcon width={20} height={20} />}
               </button>
             </div>
             <pre>
-              <code>{code}</code>
+              <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
             </pre>
           </div>
         </div>
