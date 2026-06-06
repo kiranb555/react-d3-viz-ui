@@ -8,6 +8,8 @@ export function LanguageSwitcher() {
   const languages = [
     { code: 'en', label: 'English', native: 'English' },
     { code: 'fr', label: 'Français', native: 'Français' },
+    { code: 'de', label: 'Deutsch', native: 'Deutsch' },
+    { code: 'hi', label: 'हिन्दी', native: 'हिन्दी' },
     { code: 'ar', label: 'العربية', native: 'العربية' },
     { code: 'kn', label: 'ಕನ್ನಡ', native: 'ಕನ್ನಡ' },
   ];
