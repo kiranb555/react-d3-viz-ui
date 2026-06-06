@@ -9,7 +9,9 @@ import { Playground } from './Playground';
 import { charts } from './registry';
 import { useTranslation } from 'react-i18next';
 import { useRTL } from './useRTL';
+import { useTheme } from './useTheme';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { ThemeToggle } from './ThemeToggle';
 import {
   PhotoIcon,
   SparklesIcon,
@@ -23,6 +25,7 @@ export default function App() {
   const [route, navigate] = useHashRoute();
   const { t } = useTranslation();
   useRTL();
+  const { theme, toggleTheme } = useTheme();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
@@ -109,6 +112,7 @@ export default function App() {
             GitHub <ArrowTopRightOnSquareIcon className="nav-ext-icon" />
           </a>
           <LanguageSwitcher />
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
         </nav>
       </header>
 
