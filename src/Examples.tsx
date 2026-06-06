@@ -7,8 +7,27 @@ export function Examples({ navigate }: { navigate: (r: Route) => void }) {
 
   return (
     <div className="examples">
+      <div className="examples-index">
+        <h2>Chart Examples</h2>
+        <div className="examples-index-grid">
+          {charts.map((c) => (
+            <a
+              key={c.id}
+              href={`#example-${c.id}`}
+              className="examples-index-item"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById(`example-${c.id}`)?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              {t(`charts.${c.id}.title`, c.title)}
+            </a>
+          ))}
+        </div>
+      </div>
+
       {charts.map((c) => (
-        <div key={c.id} className="examples-chart">
+        <div key={c.id} id={`example-${c.id}`} className="examples-chart">
           <h2>{t(`charts.${c.id}.title`, c.title)}</h2>
           {c.examples.map((ex, idx) => {
             const exampleKey = ex.title.toLowerCase().replace(/\s+/g, '');

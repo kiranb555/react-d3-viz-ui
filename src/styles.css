@@ -83,7 +83,44 @@ body { margin: 0; background: var(--bg); }
 
 /* Examples */
 .examples { max-width: 920px; }
-.examples-chart { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 22px; margin-bottom: 24px; }
+.examples-index {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.examples-index h2 {
+  margin: 0 0 18px;
+  font-size: 18px;
+  color: var(--accent);
+}
+.examples-index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+.examples-index-item {
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  border: 1px solid #d0d9ff;
+  border-radius: 8px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.examples-index-item:hover {
+  background: linear-gradient(135deg, var(--accent) 0%, #6366f1 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+.examples-chart { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 22px; margin-bottom: 24px; scroll-margin-top: 100px; }
 .examples-chart h2 { margin: 0 0 18px; font-size: 18px; }
 .examples-preset { margin-bottom: 24px; }
 .examples-preset h3 { margin: 0 0 6px; font-size: 14px; }
