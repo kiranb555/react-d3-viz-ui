@@ -20,7 +20,7 @@ body { margin: 0; background: var(--bg); }
 .header {
   display: flex; align-items: center; justify-content: space-between;
   gap: 16px; padding: 16px 28px; background: var(--panel);
-  border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;
+  border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; flex-wrap: wrap;
 }
 .brand h1 { margin: 0; font-size: 20px; letter-spacing: -0.02em; }
 .brand .tagline { font-size: 13px; color: var(--muted); }
@@ -33,6 +33,20 @@ body { margin: 0; background: var(--bg); }
 .nav button.nav-active { color: var(--accent); background: #eef2ff; }
 .nav-ext { margin-left: 8px; font-size: 13px; color: var(--muted); text-decoration: none; }
 .nav-ext:hover { color: var(--text); }
+
+.hamburger {
+  display: none; /* hidden on desktop */
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--text);
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
 
 .main { flex: 1; padding: 28px; max-width: 1180px; width: 100%; margin: 0 auto; }
 
@@ -171,4 +185,107 @@ body { margin: 0; background: var(--bg); }
 
 .language-option:not(:last-child) {
   border-bottom: 1px solid #eee;
+}
+
+@media (max-width: 640px) {
+  /* Header adjustments */
+  .header {
+    padding: 12px 16px;
+  }
+  .brand h1 {
+    font-size: 18px;
+  }
+  .brand .tagline {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+
+  /* Mobile nav menu */
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 8px;
+    gap: 4px;
+  }
+  .header[data-menu-open="true"] .nav {
+    display: flex;
+  }
+  .nav button,
+  .nav a {
+    text-align: left;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  .nav button:hover,
+  .nav a:hover {
+    background: #f3f4f6;
+  }
+  .nav-ext {
+    margin-left: 0;
+    display: block;
+  }
+
+  /* Gallery single column */
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  /* Examples full width */
+  .example-group {
+    margin-bottom: 24px;
+  }
+
+  /* Docs adjustments */
+  .docs {
+    max-width: 100%;
+  }
+  .props-table {
+    font-size: 12px;
+  }
+  .props-table th,
+  .props-table td {
+    padding: 6px 8px;
+  }
+
+  /* Playground controls below chart */
+  .play-grid {
+    grid-template-columns: 1fr;
+  }
+  .panel {
+    top: auto;
+    position: relative;
+  }
+
+  /* Main content padding */
+  .main {
+    padding: 16px;
+  }
+
+  /* Card adjustments */
+  .card {
+    padding: 14px;
+  }
+  .card-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .btn-link {
+    font-size: 11px;
+  }
+
+  /* Footer padding */
+  .footer {
+    padding: 16px;
+    font-size: 12px;
+  }
 }
